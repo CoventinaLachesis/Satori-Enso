@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
         body.velocity = new Vector2(Input.GetAxis("Horizontal") * horizontalSpeed, body.velocity.y);
 
         if(Input.GetKeyDown(KeyCode.Space) && CheckJump()) {
-            Debug.Log(currentJump);
             currentJump--;
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
         }
