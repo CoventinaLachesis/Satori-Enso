@@ -1,30 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
-public class BossTypeB : BossPattern
+public class BossTypeA : BossPattern
 {
     protected override void Start()
     {
         Invoke(nameof(StartShooting), 3f); // Waits 3 seconds, then starts shooting
     }
+
+
     protected override IEnumerator AttackPattern()
     {
+        float angle = 0f;
         while (true)
         {
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 10; i++)
             {
-                float angle = i * (360f / 16);
-                ShootBullet(angle, 6f);
+                float currentAngle = angle + (i * 36f);
+                ShootBullet(currentAngle, 5f);
             }
+            angle += 10f;
             yield return new WaitForSeconds(fireRate);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player")) // Replace "Player" with the actual tag of your player character
-        {
-            StartShooting();
         }
     }
 }
