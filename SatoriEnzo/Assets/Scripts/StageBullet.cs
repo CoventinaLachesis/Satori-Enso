@@ -12,13 +12,6 @@ public class StageBullet : MonoBehaviour
     private Vector3 spawnPoint;
     private bool isActive = false;
 
-    private void OnCollisionEnter2D(Collision2D collision) 
-    {
-        if(collision.gameObject.CompareTag("Player")) {
-            EndGame();
-        }
-    }
-
     void Start() 
     {
         moveDirection = GetUnitVector(moveAngleDeg);
@@ -39,13 +32,6 @@ public class StageBullet : MonoBehaviour
         float angleRad;
         angleRad = moveAngleDeg * Mathf.Deg2Rad;
         return new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
-    }
-
-    private void EndGame() 
-    {
-        // TODO end game
-        Deactivate();
-        Debug.Log("Bullet Hit");
     }
 
     public void Activate()
