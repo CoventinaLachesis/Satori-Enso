@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class StageBullet : MonoBehaviour
 {
 
-    public float moveAngleDeg = 0;
+    public float moveAngleDeg = 0f;
     private Vector2 moveDirection;
-    public float moveSpeed = 1;
+    public float moveSpeed = 1f;
+    public float delay = 0f;
+    private Vector3 spawnPoint;
     private bool isActive = false;
 
     private void OnCollisionEnter2D(Collision2D collision) 
@@ -20,7 +22,7 @@ public class Bullet : MonoBehaviour
     void Start() 
     {
         moveDirection = GetUnitVector(moveAngleDeg);
-        Debug.Log(moveDirection);
+        spawnPoint = transform.position;
     }
 
     void Update() 
@@ -42,6 +44,7 @@ public class Bullet : MonoBehaviour
     private void EndGame() 
     {
         // TODO end game
+        Deactivate();
         Debug.Log("Bullet Hit");
     }
 
@@ -52,6 +55,7 @@ public class Bullet : MonoBehaviour
 
     public void Deactivate() 
     {
+        transform.position = spawnPoint;
         isActive = false;
     }
 }
