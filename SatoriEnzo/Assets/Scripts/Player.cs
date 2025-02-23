@@ -10,7 +10,11 @@ public class Player : MonoBehaviour
     public float jumpSpeed;
     private int maxJump = 2; // Default Double Jump
     private int currentJump;
-    private int bonusJump = 0; // From Item etc.
+    private int bonusJump = 0;
+    private float bonusHorizontalSpeed = 0;
+    private float bonusJumpSpeed = 0;
+
+    private float bonusShieldCount = 0; 
 
     [SerializeField] private string endingSceneName = "GameOver"; // Set this in Inspector
 
@@ -22,7 +26,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * horizontalSpeed, body.velocity.y);
+        body.velocity = new Vector2(Input.GetAxis("Horizontal") * (horizontalSpeed + bonusHorizontalSpeed), body.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.Space) && CheckJump())
         {
@@ -40,7 +44,15 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Bullet"))
         {
+            if(bonusShieldCount > 0) return;
+
             GoToEnding(); // Call function to change scene
+        }
+
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            Destroy(collision.gameObject);
+            ApplyItemBonus(collision.gameObject);
         }
     }
 
@@ -57,5 +69,32 @@ public class Player : MonoBehaviour
     private void GoToEnding()
     {
         SceneManager.LoadScene(endingSceneName);
+    }
+
+    private void ApplyItemBonus(GameObject Item)
+    {
+        Item itemScript = Item.GetComponent<Item>();
+
+        if(itemScript == null)
+        {
+            Debug.LogError("Cannot find Item script");
+        }
+
+        bonusJump += itemScript.bonusJump;
+        bonusHorizontalSpeed += itemScript.bonusHorizontalSpeed;
+        bonusJumpSpeed += itemScript.bonusJumpSpeed;
+        if(itemScript.bonusShield) bonusShieldCount += 1;
+
+        StartCoroutine(RevertItemBonus(itemScript));
+    }
+
+    IEnumerator RevertItemBonus(Item itemScript)
+    {
+        yield return new WaitForSeconds(itemScript.duration);
+
+        bonusJump -= itemScript.bonusJump;
+        bonusHorizontalSpeed -= itemScript.bonusHorizontalSpeed;
+        bonusJumpSpeed -= itemScript.bonusJumpSpeed;
+        if(itemScript.bonusShield) bonusShieldCount -= 1;
     }
 }
