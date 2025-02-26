@@ -17,10 +17,16 @@ public class Player : MonoBehaviour
     private float bonusShieldCount = 0; 
 
     [SerializeField] private string endingSceneName = "GameOver"; // Set this in Inspector
+    [SerializeField] private AudioClip jumpSound;   // Drag jump sound here
+    [SerializeField] private AudioClip hitSound;    // Drag hit sound here
+    [SerializeField] private AudioClip getItemSound;    // Drag hit sound here
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         ResetJump();
     }
 
@@ -32,6 +38,7 @@ public class Player : MonoBehaviour
         {
             currentJump--;
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+            PlaySound(jumpSound);
         }
     }
 
@@ -44,13 +51,15 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            if(bonusShieldCount > 0) return;
+            PlaySound(hitSound);
+            if (bonusShieldCount > 0) return;
 
-            GoToEnding(); // Call function to change scene
+            Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
         }
 
         if (collision.gameObject.CompareTag("Item"))
         {
+            PlaySound(getItemSound);
             Destroy(collision.gameObject);
             ApplyItemBonus(collision.gameObject);
         }
@@ -69,6 +78,13 @@ public class Player : MonoBehaviour
     private void GoToEnding()
     {
         SceneManager.LoadScene(endingSceneName);
+    }
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            audioSource.PlayOneShot(clip); // Play sound once
+        }
     }
 
     private void ApplyItemBonus(GameObject Item)

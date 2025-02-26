@@ -14,7 +14,10 @@ public class BossBullet : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, lifetime);
+        if (gameObject.scene.rootCount != 0)
+        {
+            Destroy(gameObject, lifetime);
+        }
     }
 
     void Update()
