@@ -1,12 +1,24 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class BossTypeB : BossPattern
 {
     protected override void Start()
     {
-        Invoke(nameof(StartShooting), 3f); // Waits 3 seconds, then starts shooting
+        Invoke(nameof(InitializeBoss), 1f); // Waits 1 second to ensure everything loads
     }
+
+    private void InitializeBoss()
+    {
+        if (audioSource == null)
+        {
+            Debug.LogError("❌ AudioSource is still NULL on " + gameObject.name);
+        }
+
+        StartShooting(); // Only starts shooting if AudioSource is ready
+    }
+
+
     protected override IEnumerator AttackPattern()
     {
         while (true)
