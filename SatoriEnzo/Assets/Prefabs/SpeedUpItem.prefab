@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusJumpSpeed: 0
-  bonusHorizontalSpeed: 20
+  bonusHorizontalSpeed: 5
   bonusJump: 0
   bonusShield: 0
   duration: 5
