@@ -171,6 +171,105 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &170643848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 170643850}
+  - component: {fileID: 170643849}
+  m_Layer: 0
+  m_Name: PuzzleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &170643849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170643848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee95a092d6359cd4f83593d279c779ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzles:
+  - {fileID: 324732229}
+  spawnInterval: 5
+  puzzleDuration: 10
+--- !u!4 &170643850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170643848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15075761, y: 0.33128858, z: -0.055006325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &324732229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 324732231}
+  - component: {fileID: 324732230}
+  m_Layer: 0
+  m_Name: CannonPuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &324732230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324732229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32172b9e0a6c3f54fa504b7ddf51d69f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 666916973}
+  boss: {fileID: 1503794742}
+  cannonPrefab: {fileID: 944909106281344931, guid: 399b0448232efc940acff50302af7e19, type: 3}
+  cannonBallItemPrefab: {fileID: 3380222835093163166, guid: 9934aa3655f47674aa64d4b41edcad48, type: 3}
+  cannonBallProjectilePrefab: {fileID: 4763697788639711798, guid: 788fa666630672e41ab640e5769aa3d7, type: 3}
+  spawnMin: {x: -7, y: -2.52}
+  spawnMax: {x: 7, y: -2.52}
+--- !u!4 &324732231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324732229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352007176
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,8 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positiveItemPrefabs:
-  - {fileID: 1067630554735440097, guid: 7e223ecdfd95b5a478f47fffc926b328, type: 3}
   - {fileID: 8356031512864486038, guid: 8c18d93f89bed71459944722f67a4c59, type: 3}
+  - {fileID: 1067630554735440097, guid: 7e223ecdfd95b5a478f47fffc926b328, type: 3}
   negativeItemPrefabs:
   - {fileID: 259670498764846153, guid: 3c447fb701839f04ca8dd4b5f9086b25, type: 3}
   spawnMin: {x: -7, y: -3}
@@ -1418,7 +1517,7 @@ GameObject:
   - component: {fileID: 1503794749}
   m_Layer: 0
   m_Name: boss1(2)
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1507,6 +1606,17 @@ MonoBehaviour:
   fireRate: 5
   maxHealth: 100
   shootSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  bulletPatterns:
+  - patternType: 0
+    delayBeforeStart: 0
+    bulletCount: 0
+    speed: 0
+    initialRadius: 0
+    expansionRate: 0
+    sizeIncreaseRate: 0
+    spirals: 0
+    rings: 0
+    shootDirection: 0
 --- !u!58 &1503794748
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2230,3 +2340,5 @@ SceneRoots:
   - {fileID: 662036772}
   - {fileID: 1881465089}
   - {fileID: 356872308}
+  - {fileID: 170643850}
+  - {fileID: 324732231}
