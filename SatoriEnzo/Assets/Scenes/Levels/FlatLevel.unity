@@ -207,7 +207,7 @@ MonoBehaviour:
   - {fileID: 259670498764846153, guid: 3c447fb701839f04ca8dd4b5f9086b25, type: 3}
   spawnMin: {x: -7, y: -3}
   spawnMax: {x: 7, y: -2}
-  spawnInterval: 10
+  spawnInterval: 1
 --- !u!4 &352007178
 Transform:
   m_ObjectHideFlags: 0
@@ -1502,11 +1502,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb330d0bf1617743b7612c7737f2161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8699459242365256332, guid: 333cdfb200571314eb62ad3cd3ab437a, type: 3}
+  bulletPrefab: {fileID: 1339478871143762729, guid: c50f99f5536097847a51d91a2084aa5a, type: 3}
   firePoint: {fileID: 1503794746}
   fireRate: 5
   maxHealth: 100
   shootSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  bulletPatterns:
+  - patternType: 5
+    delayBeforeStart: 1.22
+    bulletCount: 3
+    speed: 7.99
+    initialRadius: 0
+    expansionRate: 0
+    sizeIncreaseRate: 0
+    spirals: 11
+    rings: 0
+    shootDirection: 0
 --- !u!58 &1503794748
 CircleCollider2D:
   m_ObjectHideFlags: 0

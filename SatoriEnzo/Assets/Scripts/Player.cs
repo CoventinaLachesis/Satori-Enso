@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private string inputBuffer = ""; // Buffer for player typing
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -40,7 +42,40 @@ public class Player : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
             PlaySound(jumpSound);
         }
+
+
+        // Capture typing input
+        foreach (char c in Input.inputString)
+        {
+            if (c == '\b' && inputBuffer.Length > 0)
+            {
+                inputBuffer = inputBuffer.Substring(0, inputBuffer.Length - 1); // Handle backspace
+            }
+            else if (c == '\n' || c == '\r')
+            {
+                CheckBulletsForAnswer(inputBuffer); // Check answer on enter
+                inputBuffer = "";
+            }
+            else
+            {
+                inputBuffer += c; // Add to input buffer
+            }
+        }
     }
+    private void CheckBulletsForAnswer(string input)
+    {
+        BossBullet[] bullets = FindObjectsOfType<BossBullet>();
+
+        foreach (BossBullet bullet in bullets)
+        {
+            if (bullet.CheckAnswer(input))
+            {
+                Destroy(bullet.gameObject); // Destroy bullet on correct answer
+                break;
+            }
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
