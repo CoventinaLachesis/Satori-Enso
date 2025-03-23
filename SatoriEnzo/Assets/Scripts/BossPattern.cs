@@ -51,7 +51,7 @@ public abstract class BossPattern : MonoBehaviour
         }
     }
 
-    protected void ShootBullet(float angle, float speed, BulletMotionType motionType, float waveFreq = 5f, float waveAmp = 0.5f)
+    protected void ShootBullet(float angle, float speed)
     {
         if (bulletPrefab == null)
         {
@@ -64,16 +64,13 @@ public abstract class BossPattern : MonoBehaviour
             return;
         }
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        BossBullet bulletScript = bullet.GetComponent<BossBullet>();
 
+        BossBullet bulletScript = bullet.GetComponent<BossBullet>();
         if (bulletScript != null)
         {
             Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
             bulletScript.SetDirection(direction);
             bulletScript.speed = speed;
-            bulletScript.motionType = motionType;
-            bulletScript.waveFrequency = waveFreq;
-            bulletScript.waveAmplitude = waveAmp;
         }
         else
         {
