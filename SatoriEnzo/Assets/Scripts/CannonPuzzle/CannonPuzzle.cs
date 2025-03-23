@@ -60,7 +60,6 @@ public class CannonPuzzle : Puzzle
         { 
             isCannonBallRetrieved = true;
             Destroy(cannonBallItem);
-            Debug.Log("CannonBall Retrieved");
         }
 
         if(cannonScript.GetIsHit() && isCannonBallRetrieved)
@@ -72,12 +71,24 @@ public class CannonPuzzle : Puzzle
 
     private void Shoot()
     {
-        Vector3 spawnPoint = new Vector3(cannon.transform.position.x, cannon.transform.position.y + (cannon.transform.lossyScale.y), 0);
+        cannonScript.RotateToTarget(boss.transform.position);
+
+        GameObject firePoint = cannon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        Vector3 spawnPoint = firePoint.transform.position;
 
         cannonBallProjectile = Instantiate(cannonBallProjectilePrefab, spawnPoint, Quaternion.identity);
         cannonBallProjectileScript = cannonBallProjectile.GetComponent<CannonBallProjectile>();
-
         cannonBallProjectileScript.StartMoving(boss.transform.position);
+        if (explosionVFX != null)
+        {
+            ParticleSystem vfxInstance = Instantiate(explosionVFX, spawnPoint, Quaternion.identity);
+            vfxInstance.Play();
+            Destroy(vfxInstance.gameObject, vfxInstance.main.duration); // Auto-destroy after animation ends
+        }
+        else
+        {
+            Debug.LogWarning("No explosionVFX assigned in CannonPuzzle!");
+        }
     }
 
     private void LoadScript()

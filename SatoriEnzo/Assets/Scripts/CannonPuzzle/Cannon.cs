@@ -25,4 +25,15 @@ public class Cannon : MonoBehaviour
     {
         return isHit;
     }
+
+    public void RotateToTarget(Vector3 targetPosition)
+    {
+        GameObject cannonPivotObject = this.transform.GetChild(0).gameObject;
+        if(cannonPivotObject == null) Debug.LogError("Cannon find Cannon Pivot Game Object (First Child Object of Cannon Object)");
+
+        CannonPivot cannonPivotScript = cannonPivotObject.GetComponent<CannonPivot>();
+        if(cannonPivotScript == null) Debug.LogError("Cannon find Cannon Pivot Script");
+
+        cannonPivotScript.RotateToTarget(targetPosition);
+    }
 }

@@ -203,7 +203,7 @@ MonoBehaviour:
   puzzles:
   - {fileID: 324732229}
   spawnInterval: 5
-  puzzleDuration: 10
+  puzzleDuration: 5
 --- !u!4 &170643850
 Transform:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 666916973}
   boss: {fileID: 1503794742}
-  cannonPrefab: {fileID: 944909106281344931, guid: 399b0448232efc940acff50302af7e19, type: 3}
+  cannonPrefab: {fileID: 1697921259061201299, guid: 96bd561e9ec6a424983ddafc7d40dc45, type: 3}
   cannonBallItemPrefab: {fileID: 3380222835093163166, guid: 9934aa3655f47674aa64d4b41edcad48, type: 3}
   cannonBallProjectilePrefab: {fileID: 4763697788639711798, guid: 788fa666630672e41ab640e5769aa3d7, type: 3}
   spawnMin: {x: -7, y: -2.52}
