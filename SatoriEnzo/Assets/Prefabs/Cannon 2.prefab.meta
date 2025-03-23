@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SatoriEnzo/Assets/Prefabs/Cannon 2.prefab.meta
 guid: 96bd561e9ec6a424983ddafc7d40dc45
 PrefabImporter:
+========
+guid: feab16a5bb0be0749b348874397e408c
+DefaultImporter:
+>>>>>>>> a62e5fcbed5ff57761f03f349e66138bc275cc65:SatoriEnzo/Assets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
