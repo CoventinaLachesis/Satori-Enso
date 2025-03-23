@@ -75,7 +75,10 @@ public class CannonPuzzle : Puzzle
 
     private void Shoot()
     {
-        Vector3 spawnPoint = new Vector3(cannon.transform.position.x, cannon.transform.position.y + (cannon.transform.lossyScale.y), 0);
+        cannonScript.RotateToTarget(boss.transform.position);
+
+        GameObject firePoint = cannon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        Vector3 spawnPoint = firePoint.transform.position;
 
         cannonBallProjectile = Instantiate(cannonBallProjectilePrefab, spawnPoint, Quaternion.identity);
         cannonBallProjectileScript = cannonBallProjectile.GetComponent<CannonBallProjectile>();
