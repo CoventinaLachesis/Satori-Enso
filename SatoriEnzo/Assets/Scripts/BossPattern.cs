@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public abstract class BossPattern : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public abstract class BossPattern : MonoBehaviour
     private int currentHealth;
     [SerializeField] public int maxHealth = 100;
     [SerializeField] private AudioClip shootSound;
+    [SerializeField] protected Image healthBar;
+    protected HealthBar healthBarScript;
 
     protected bool isShooting = false; // Prevents shooting until triggered
 
@@ -32,9 +35,25 @@ public abstract class BossPattern : MonoBehaviour
         {
             Debug.Log("✅ AudioSource successfully assigned on " + gameObject.name);
         }
-    }
-    protected virtual void Start() {
+
         currentHealth = maxHealth;
+
+        if (healthBar == null)
+        {
+            Debug.LogError("No Health Bar Assigned to Boss");
+        }
+        else
+        {
+            healthBarScript = healthBar.GetComponent<HealthBar>();
+            healthBarScript.SetMaxValue(maxHealth);
+            healthBarScript.SetCurrentValue(currentHealth);
+        }
+
+        TakeDamage(50);
+    }
+    protected virtual void Start() 
+    {
+        
     }
 
 
@@ -104,6 +123,7 @@ public abstract class BossPattern : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthBarScript.SetCurrentValue(currentHealth);
         if (currentHealth <= maxHealth / 2) // Start shooting if health is below 50%
         {
             StartShooting();
