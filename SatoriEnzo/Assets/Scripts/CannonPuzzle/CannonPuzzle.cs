@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CannonPuzzle : Puzzle
 {
@@ -17,6 +18,8 @@ public class CannonPuzzle : Puzzle
     private CannonBallProjectile cannonBallProjectileScript;
     private bool isActive;
     private bool isCannonBallRetrieved;
+    [SerializeField] ParticleSystem explosionVFX;
+
 
     public Vector2 spawnMin;
     public Vector2 spawnMax;
@@ -78,6 +81,16 @@ public class CannonPuzzle : Puzzle
         cannonBallProjectileScript = cannonBallProjectile.GetComponent<CannonBallProjectile>();
 
         cannonBallProjectileScript.StartMoving(boss.transform.position);
+        if (explosionVFX != null)
+        {
+            ParticleSystem vfxInstance = Instantiate(explosionVFX, spawnPoint, Quaternion.identity);
+            vfxInstance.Play();
+            Destroy(vfxInstance.gameObject, vfxInstance.main.duration); // Auto-destroy after animation ends
+        }
+        else
+        {
+            Debug.LogWarning("No explosionVFX assigned in CannonPuzzle!");
+        }
     }
 
     private void LoadScript()

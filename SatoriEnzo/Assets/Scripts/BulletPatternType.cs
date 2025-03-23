@@ -25,6 +25,14 @@ public enum ShootDirection
     DownLeft,  // 225 degrees
     DownRight  // 315 degrees
 }
+public enum BulletMotionType
+{
+    Straight,
+    SineWave,
+    Zigzag,
+    Custom
+}
+
 
 [Serializable]
 public class BulletPatternConfig
@@ -36,6 +44,13 @@ public class BulletPatternConfig
     [Header("Common Parameters")]
     public int bulletCount = 12;
     public float speed = 5f;
+
+    [Header("Motion Settings")]
+    public BulletMotionType motionType = BulletMotionType.Straight;
+    [ConditionalField("motionType", BulletMotionType.Zigzag, BulletMotionType.SineWave)]
+    public float waveFrequency = 5f;
+    [ConditionalField("motionType", BulletMotionType.Zigzag, BulletMotionType.SineWave)]
+    public float waveAmplitude = 0.5f;
 
     [Header("Pattern Specific Settings")]
     [ConditionalField("patternType", BulletPatternType.OrbitingBulletRing)]
