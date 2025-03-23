@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement; // Required for scene management
 public class Player : MonoBehaviour
 {
     private Rigidbody2D body;
+    private BoxCollider2D playerCollider;
+    private Animator anim;
+    private GameObject currentPlatform;
     public float horizontalSpeed;
     public float jumpSpeed;
     private int maxJump = 2; // Default Double Jump
@@ -15,7 +18,9 @@ public class Player : MonoBehaviour
     private float bonusJumpSpeed = 0;
 
     private float bonusShieldCount = 0; 
-
+    private Vector3 initScale;
+    
+    [SerializeField] private LayerMask platformLayer;
     [SerializeField] private string endingSceneName = "GameOver"; // Set this in Inspector
     [SerializeField] private AudioClip jumpSound;   // Drag jump sound here
     [SerializeField] private AudioClip hitSound;    // Drag hit sound here
@@ -26,27 +31,57 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        playerCollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+
+        initScale = transform.localScale;
         ResetJump();
     }
 
     private void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(Input.GetAxis("Horizontal") * (horizontalSpeed + bonusHorizontalSpeed), body.velocity.y);
+
+        if (horizontalInput > 0.01f)
+            transform.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
+        else if (horizontalInput < -0.01f)
+            transform.localScale = new Vector3(-initScale.x, initScale.y, initScale.z);
 
         if (Input.GetKeyDown(KeyCode.Space) && CheckJump())
         {
             currentJump--;
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
             PlaySound(jumpSound);
+            anim.SetBool("OnGround", false);
         }
+
+        if(
+            (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
+            && currentPlatform != null
+        )
+        {
+            StartCoroutine(DisablePlatformCollision());
+            anim.SetBool("OnGround", false);
+        }
+
+        anim.SetBool("IsRunning", horizontalInput != 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            ResetJump();
+            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) ResetJump(); // Check Above
+            anim.SetBool("OnGround", true);
+        }
+
+        if(collision.gameObject.CompareTag("Platform"))
+        {
+            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) ResetJump(); // Check Above
+            currentPlatform = collision.gameObject;
+            anim.SetBool("OnGround", true);
         }
 
         if (collision.gameObject.CompareTag("Bullet"))
@@ -62,6 +97,15 @@ public class Player : MonoBehaviour
             PlaySound(getItemSound);
             Destroy(collision.gameObject);
             ApplyItemBonus(collision.gameObject);
+        }
+        
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Platform"))
+        {
+            currentPlatform = null;
         }
     }
 
@@ -112,5 +156,14 @@ public class Player : MonoBehaviour
         bonusHorizontalSpeed -= itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed -= itemScript.bonusJumpSpeed;
         if(itemScript.bonusShield) bonusShieldCount -= 1;
+    }
+
+    IEnumerator DisablePlatformCollision()
+    {
+        BoxCollider2D platformCollider = currentPlatform.GetComponent<BoxCollider2D>();
+
+        Physics2D.IgnoreCollision(playerCollider, platformCollider);
+        yield return new WaitForSeconds(0.5f);
+        Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
     }
 }
