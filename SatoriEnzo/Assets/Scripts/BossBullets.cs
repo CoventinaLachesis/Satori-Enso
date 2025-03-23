@@ -64,8 +64,7 @@ public class BossBullet : MonoBehaviour
         switch (motionType)
         {
             case BulletMotionType.Straight:
-                rb.velocity = direction * speed;
-                return;
+                break;
 
             case BulletMotionType.SineWave:
                 float sineOffset = Mathf.Sin(timeAlive * waveFrequency) * waveAmplitude;

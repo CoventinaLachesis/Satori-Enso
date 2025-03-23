@@ -148,8 +148,11 @@ MonoBehaviour:
   speed: 25
   lifetime: 5
   bounceMultiplier: 0.5
-  extraBounceForce: 0
-  maxBounces: 10
+  extraBounceForce: 1
+  maxBounces: 4
+  motionType: 0
+  waveFrequency: 5
+  waveAmplitude: 0.5
 --- !u!50 &3777696537299145845
 Rigidbody2D:
   serializedVersion: 4
@@ -166,7 +169,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: d772943ee782c844ead42385ddbf86e1, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
