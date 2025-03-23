@@ -253,6 +253,7 @@ MonoBehaviour:
   cannonPrefab: {fileID: 1697921259061201299, guid: 96bd561e9ec6a424983ddafc7d40dc45, type: 3}
   cannonBallItemPrefab: {fileID: 3380222835093163166, guid: 9934aa3655f47674aa64d4b41edcad48, type: 3}
   cannonBallProjectilePrefab: {fileID: 4763697788639711798, guid: 788fa666630672e41ab640e5769aa3d7, type: 3}
+  explosionVFX: {fileID: 4593184484909914550, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
   spawnMin: {x: -7, y: -2.52}
   spawnMax: {x: 7, y: -2.52}
 --- !u!4 &324732231
@@ -1782,14 +1783,17 @@ MonoBehaviour:
   maxHealth: 100
   shootSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
   bulletPatterns:
-  - patternType: 0
-    delayBeforeStart: 0
-    bulletCount: 0
-    speed: 0
+  - patternType: 1
+    delayBeforeStart: 1.66
+    bulletCount: 10
+    speed: 0.4
+    motionType: 0
+    waveFrequency: 4.33
+    waveAmplitude: 2.25
     initialRadius: 0
     expansionRate: 0
     sizeIncreaseRate: 0
-    spirals: 0
+    spirals: 3
     rings: 0
     shootDirection: 0
 --- !u!58 &1503794748

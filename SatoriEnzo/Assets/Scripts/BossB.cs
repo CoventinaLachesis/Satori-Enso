@@ -16,8 +16,10 @@ public class BossTypeB : BossPattern
         {
             Debug.LogError("❌ AudioSource is still NULL on " + gameObject.name);
         }
-
-        StartShooting();
+        if (bulletPatterns != null && bulletPatterns.Length > 0)
+        {
+            StartShooting();
+        }
     }
 
     protected override IEnumerator AttackPattern()
@@ -40,93 +42,87 @@ public class BossTypeB : BossPattern
                         break;
 
                     case BulletPatternType.SpiralShot:
-                        yield return SpiralShot(config.spirals);
+                        yield return SpiralShot(config.spirals, config);
                         break;
 
                     case BulletPatternType.RadialBurst:
-                        yield return RadialBurst(config.bulletCount, config.speed);
+                        yield return RadialBurst(config.bulletCount, config.speed, config);
                         break;
 
                     case BulletPatternType.WaveAttack:
-                        yield return WaveAttack(config.bulletCount, config.speed, config.shootDirection);
+                        yield return WaveAttack(config.bulletCount, config.speed, config.shootDirection, config);
                         break;
 
                     case BulletPatternType.SweepingArc:
-                        yield return SweepingArc(config.bulletCount, config.speed, config.shootDirection);
+                        yield return SweepingArc(config.bulletCount, config.speed, config.shootDirection, config);
                         break;
 
                     case BulletPatternType.BulletRings:
-                        yield return BulletRings(config.rings, config.bulletCount, config.speed);
+                        yield return BulletRings(config.rings, config.bulletCount, config.speed, config);
                         break;
                 }
             }
         }
     }
 
-    // 1️⃣ Spiral Shot - Bullets rotate in a spiral pattern
-    private IEnumerator SpiralShot(int spirals)
+    private IEnumerator SpiralShot(int spirals, BulletPatternConfig config)
     {
         float angle = 0;
-        for (int i = 0; i < spirals * 20; i++) // More bullets = denser spiral
+        for (int i = 0; i < spirals * 20; i++)
         {
-            ShootBullet(angle, 5f);
-            angle += 18f; // Rotate slightly each shot
+            ShootBullet(angle, 5f, config.motionType, config.waveFrequency, config.waveAmplitude);
+            angle += 18f;
             yield return new WaitForSeconds(0.1f);
         }
     }
 
-    // 2️⃣ Radial Burst - Shoots bullets in all directions
-    private IEnumerator RadialBurst(int bulletCount, float speed)
+    private IEnumerator RadialBurst(int bulletCount, float speed, BulletPatternConfig config)
     {
         for (int i = 0; i < bulletCount; i++)
         {
             float angle = i * (360f / bulletCount);
-            ShootBullet(angle, speed);
+            ShootBullet(angle, speed, config.motionType, config.waveFrequency, config.waveAmplitude);
         }
-        yield return null; // Instant burst
+        yield return null;
     }
 
-    // 3️⃣ Wave Attack - Bullets follow a wavy pattern
-    private IEnumerator WaveAttack(int bullets, float speed, ShootDirection direction)
+    private IEnumerator WaveAttack(int bullets, float speed, ShootDirection direction, BulletPatternConfig config)
     {
         float baseAngle = GetAngleFromDirection(direction);
 
         for (int i = 0; i < bullets; i++)
         {
-            float angle = baseAngle + Mathf.Sin(Time.time * 5f) * 30f; // Wave motion around base angle
-            ShootBullet(angle, speed);
+            float angle = baseAngle + Mathf.Sin(Time.time * 5f) * 30f;
+            ShootBullet(angle, speed, config.motionType, config.waveFrequency, config.waveAmplitude);
             yield return new WaitForSeconds(0.2f);
         }
     }
 
-    // 4️⃣ Sweeping Arc - Bullets sweep from one side to the other
-    private IEnumerator SweepingArc(int bulletCount, float speed, ShootDirection direction)
+    private IEnumerator SweepingArc(int bulletCount, float speed, ShootDirection direction, BulletPatternConfig config)
     {
         float baseAngle = GetAngleFromDirection(direction);
-        float sweepRange = 90f; // Default sweeping range
+        float sweepRange = 90f;
 
         for (int i = 0; i < bulletCount; i++)
         {
             float angle = baseAngle - (sweepRange / 2) + (i * (sweepRange / bulletCount));
-            ShootBullet(angle, speed);
+            ShootBullet(angle, speed, config.motionType, config.waveFrequency, config.waveAmplitude);
             yield return new WaitForSeconds(0.15f);
         }
     }
 
-    // 5️⃣ Bullet Rings - Fires multiple rings of bullets outward
-    private IEnumerator BulletRings(int rings, int bulletsPerRing, float speed)
+    private IEnumerator BulletRings(int rings, int bulletsPerRing, float speed, BulletPatternConfig config)
     {
         for (int r = 0; r < rings; r++)
         {
             for (int i = 0; i < bulletsPerRing; i++)
             {
                 float angle = i * (360f / bulletsPerRing);
-                ShootBullet(angle, speed);
+                ShootBullet(angle, speed, config.motionType, config.waveFrequency, config.waveAmplitude);
             }
             yield return new WaitForSeconds(0.5f);
         }
     }
-
 
     private IEnumerator OrbitingBulletRing(int bulletsPerRing, float initialRadius, float expansionRate, float sizeIncreaseRate, float speed)
     {
