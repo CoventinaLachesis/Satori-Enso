@@ -1,33 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class CannonBallProjectile : MonoBehaviour
 {
+    [Header("Settings")]
+    public float speed = 10f;
+
+    [Header("VFX & Sound")]
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private ParticleSystem explosionVFX;
+
     private Rigidbody2D body;
-    public float speed = 10;
+    private bool hasHit = false;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Awake()
     {
-        if(collision.gameObject.CompareTag("Boss"))
-        {
+        body = GetComponent<Rigidbody2D>();
 
-            BossPattern bossScript = collision.gameObject.GetComponent<BossPattern>();
-            bossScript.TakeDamage(5);
-            Destroy(gameObject);
-        }
     }
 
     public void StartMoving(Vector3 targetPosition)
     {
-        body = GetComponent<Rigidbody2D>();
         Vector3 direction = (targetPosition - transform.position).normalized;
-
         body.velocity = direction * speed;
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (hasHit) return;
 
+        if (other.CompareTag("Boss"))
+        {
+            hasHit = true;
+
+            Vector3 hitPoint = transform.position;
+            FXPlayer.PlayVFX(explosionVFX, transform.position);
+            FXPlayer.PlaySound(hitSound, transform.position,5f);
+
+            BossPattern bossScript = other.GetComponent<BossPattern>();
+            if (bossScript != null)
+            {
+                bossScript.TakeDamage(20);
+            }
+
+            Destroy(gameObject);
+        }
     }
+
 }

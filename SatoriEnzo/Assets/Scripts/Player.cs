@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private Vector3 initScale;
     
     [SerializeField] private LayerMask platformLayer;
+    [SerializeField] bool immortal=false;    // Drag hit sound here
     [SerializeField] private string endingSceneName = "GameOver"; // Set this in Inspector
     [SerializeField] private AudioClip jumpSound;   // Drag jump sound here
     [SerializeField] private AudioClip hitSound;    // Drag hit sound here
@@ -86,9 +87,11 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Bullet"))
         {
+
             PlaySound(hitSound);
             if (bonusShieldCount > 0) return;
 
+            if (immortal == false)
             Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
         }
 

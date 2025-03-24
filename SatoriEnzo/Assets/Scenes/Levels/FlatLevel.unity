@@ -254,6 +254,7 @@ MonoBehaviour:
   cannonBallItemPrefab: {fileID: 3380222835093163166, guid: 9934aa3655f47674aa64d4b41edcad48, type: 3}
   cannonBallProjectilePrefab: {fileID: 4763697788639711798, guid: 788fa666630672e41ab640e5769aa3d7, type: 3}
   explosionVFX: {fileID: 4593184484909914550, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
+  shootSound: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
   spawnMin: {x: -7, y: -2.52}
   spawnMax: {x: 7, y: -2.52}
 --- !u!4 &324732231
@@ -1144,6 +1145,7 @@ MonoBehaviour:
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
+  immortal: 1
   endingSceneName: GameOver
   jumpSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   hitSound: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
@@ -1299,8 +1301,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 20}
+  m_AnchoredPosition: {x: 0.33, y: 0}
+  m_SizeDelta: {x: 1000.66, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &712448311
 MonoBehaviour:
@@ -1340,6 +1342,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712448309}
   m_CullTransparentMesh: 1
+--- !u!1 &729691883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 729691885}
+  - component: {fileID: 729691884}
+  m_Layer: 0
+  m_Name: AudioPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &729691884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729691883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db59e2e5ebd14742a574319ddaf1a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSources: 60
+--- !u!4 &729691885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729691883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44251037, y: 0.8001517, z: 904.5917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1076679796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2117,7 @@ GameObject:
   - component: {fileID: 1503794748}
   - component: {fileID: 1503794749}
   m_Layer: 0
-  m_Name: boss1(2)
+  m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2209,7 +2256,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 58.19
+  m_Radius: 26.58
 --- !u!82 &1503794749
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2222,7 +2269,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.383
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2316,8 +2363,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1513736323}
   - component: {fileID: 1513736325}
-  - component: {fileID: 1513736324}
   - component: {fileID: 1513736326}
+  - component: {fileID: 1513736324}
   m_Layer: 5
   m_Name: Health Bar
   m_TagString: Untagged
@@ -2357,23 +2404,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 232753957, guid: c9335e0ccef8293459e0f903e0a46f42, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.17
 --- !u!222 &1513736325
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2394,6 +2441,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a68b361bf0eba49be564c2544f5234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fillBar: {fileID: 1513736324}
+  backgroundBar: {fileID: 0}
+  lerpSpeed: 10
+  healthGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 0.89433956, g: 0.8093351, b: 0.21430397, a: 1}
+    key2: {r: 1, g: 0, b: 0, a: 1}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 29992
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 37548
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 3
 --- !u!1 &1788751191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3155,6 +3235,7 @@ SceneRoots:
   - {fileID: 451733351}
   - {fileID: 666916975}
   - {fileID: 1503794746}
+  - {fileID: 2011949996}
   - {fileID: 352007178}
   - {fileID: 1476826408}
   - {fileID: 2110316421}
@@ -3168,5 +3249,4 @@ SceneRoots:
   - {fileID: 170643850}
   - {fileID: 324732231}
   - {fileID: 1076679800}
-  - {fileID: 421022455}
-  - {fileID: 2011949996}
+  - {fileID: 729691885}

@@ -19,6 +19,8 @@ public class CannonPuzzle : Puzzle
     private bool isActive;
     private bool isCannonBallRetrieved;
     [SerializeField] ParticleSystem explosionVFX;
+    [SerializeField] private AudioClip shootSound;
+
 
 
     public Vector2 spawnMin;
@@ -76,7 +78,7 @@ public class CannonPuzzle : Puzzle
     private void Shoot()
     {
         cannonScript.RotateToTarget(boss.transform.position);
-
+        FXPlayer.PlaySound(shootSound, transform.position,5f);
         GameObject firePoint = cannon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         Vector3 spawnPoint = firePoint.transform.position;
 
@@ -84,16 +86,8 @@ public class CannonPuzzle : Puzzle
         cannonBallProjectileScript = cannonBallProjectile.GetComponent<CannonBallProjectile>();
 
         cannonBallProjectileScript.StartMoving(boss.transform.position);
-        if (explosionVFX != null)
-        {
-            ParticleSystem vfxInstance = Instantiate(explosionVFX, spawnPoint, Quaternion.identity);
-            vfxInstance.Play();
-            Destroy(vfxInstance.gameObject, vfxInstance.main.duration); // Auto-destroy after animation ends
-        }
-        else
-        {
-            Debug.LogWarning("No explosionVFX assigned in CannonPuzzle!");
-        }
+        FXPlayer.PlayVFX(explosionVFX, firePoint.transform.position, firePoint.transform.eulerAngles.z);
+
     }
 
     private void LoadScript()
