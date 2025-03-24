@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private int bonusJump = 0;
     private float bonusHorizontalSpeed = 0;
     private float bonusJumpSpeed = 0;
+    private GameObject shieldObject;
 
     private float bonusShieldCount = 0; 
     private Vector3 initScale;
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        shieldObject = transform.GetChild(0).gameObject;
+        shieldObject.SetActive(false);
 
         initScale = transform.localScale;
         ResetJump();
@@ -87,7 +90,12 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             PlaySound(hitSound);
-            if (bonusShieldCount > 0) return;
+            if (bonusShieldCount > 0) 
+            {
+                Destroy(collision.gameObject);
+                return;
+            }
+            
 
             Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
         }
@@ -144,7 +152,12 @@ public class Player : MonoBehaviour
         currentJump += itemScript.bonusJump;
         bonusHorizontalSpeed += itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed += itemScript.bonusJumpSpeed;
-        if(itemScript.bonusShield) bonusShieldCount += 1;
+        if(itemScript.bonusShield)
+        {
+            bonusShieldCount += 1;
+            shieldObject.SetActive(true);
+        }
+             
 
         StartCoroutine(RevertItemBonus(itemScript));
     }
@@ -157,7 +170,12 @@ public class Player : MonoBehaviour
         currentJump -= itemScript.bonusJump;
         bonusHorizontalSpeed -= itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed -= itemScript.bonusJumpSpeed;
-        if(itemScript.bonusShield) bonusShieldCount -= 1;
+        if(itemScript.bonusShield) 
+        {
+            bonusShieldCount -= 1;
+            if(bonusShieldCount == 0) shieldObject.SetActive(false);
+        }
+            
     }
 
     IEnumerator DisablePlatformCollision()
