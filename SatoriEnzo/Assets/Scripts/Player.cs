@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private BoxCollider2D playerCollider;
     private Animator anim;
     private GameObject currentPlatform;
+    private GameObject shieldObject;
     public float horizontalSpeed;
     public float jumpSpeed;
     private int maxJump = 2; // Default Double Jump
@@ -35,6 +36,8 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        shieldObject = transform.GetChild(0).gameObject;
+        shieldObject.SetActive(false);
 
         initScale = transform.localScale;
         ResetJump();
@@ -53,7 +56,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && CheckJump())
         {
             currentJump--;
-            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+            body.velocity = new Vector2(body.velocity.x, jumpSpeed + bonusJumpSpeed);
             PlaySound(jumpSound);
             anim.SetBool("OnGround", false);
         }
@@ -144,9 +147,15 @@ public class Player : MonoBehaviour
         }
 
         bonusJump += itemScript.bonusJump;
+        currentJump += itemScript.bonusJump;
         bonusHorizontalSpeed += itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed += itemScript.bonusJumpSpeed;
-        if(itemScript.bonusShield) bonusShieldCount += 1;
+        if(itemScript.bonusShield) 
+        {
+            bonusShieldCount += 1;
+            shieldObject.SetActive(true);
+        }
+            
 
         StartCoroutine(RevertItemBonus(itemScript));
     }
@@ -156,9 +165,11 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(itemScript.duration);
 
         bonusJump -= itemScript.bonusJump;
+        currentJump -= itemScript.bonusJump;
         bonusHorizontalSpeed -= itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed -= itemScript.bonusJumpSpeed;
         if(itemScript.bonusShield) bonusShieldCount -= 1;
+        if(bonusShieldCount == 0) shieldObject.SetActive(false);
     }
 
     IEnumerator DisablePlatformCollision()
