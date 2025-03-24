@@ -92,6 +92,11 @@ public class Player : MonoBehaviour
             Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
         }
 
+        if (collision.gameObject.CompareTag("KillZone"))
+        {
+            Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
+        }
+
         if (collision.gameObject.CompareTag("Item"))
         {
             PlaySound(getItemSound);
