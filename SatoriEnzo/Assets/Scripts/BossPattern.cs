@@ -48,8 +48,6 @@ public abstract class BossPattern : MonoBehaviour
             healthBarScript.SetMaxValue(maxHealth);
             healthBarScript.SetCurrentValue(currentHealth);
         }
-
-        TakeDamage(50);
     }
     protected virtual void Start() 
     {
@@ -116,18 +114,17 @@ public abstract class BossPattern : MonoBehaviour
             return;
         }
 
-        Debug.Log("🎵 Playing sound: " + clip.name);
+        //Debug.Log("🎵 Playing sound: " + clip.name);
         audioSource.PlayOneShot(clip);
     }
 
     public void TakeDamage(int damage)
     {
+        Debug.LogError("Hit " + gameObject.name);
         currentHealth -= damage;
+        Debug.Log("Hp:" + currentHealth);
         healthBarScript.SetCurrentValue(currentHealth);
-        if (currentHealth <= maxHealth / 2) // Start shooting if health is below 50%
-        {
-            StartShooting();
-        }
+
     }
 }
 
