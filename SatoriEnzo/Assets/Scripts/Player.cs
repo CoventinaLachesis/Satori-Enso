@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     private BoxCollider2D playerCollider;
     private Animator anim;
     private GameObject currentPlatform;
-    private GameObject shieldObject;
     public float horizontalSpeed;
     public float jumpSpeed;
     private int maxJump = 2; // Default Double Jump
@@ -20,7 +19,8 @@ public class Player : MonoBehaviour
 
     private float bonusShieldCount = 0; 
     private Vector3 initScale;
-    
+
+    [SerializeField] private GameObject shieldObject;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] bool immortal=false;    // Drag hit sound here
     [SerializeField] private string endingSceneName = "GameOver"; // Set this in Inspector
@@ -92,7 +92,12 @@ public class Player : MonoBehaviour
         {
 
             PlaySound(hitSound);
-            if (bonusShieldCount > 0) return;
+            if (bonusShieldCount > 0)
+            {
+                Destroy(collision.gameObject);
+                return;
+            }
+                
 
             if (immortal == false)
             Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
