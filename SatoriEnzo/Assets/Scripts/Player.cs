@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && CheckJump())
         {
             currentJump--;
-            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+            body.velocity = new Vector2(body.velocity.x, jumpSpeed + bonusJumpSpeed);
             PlaySound(jumpSound);
             anim.SetBool("OnGround", false);
         }
@@ -141,6 +141,7 @@ public class Player : MonoBehaviour
         }
 
         bonusJump += itemScript.bonusJump;
+        currentJump += itemScript.bonusJump;
         bonusHorizontalSpeed += itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed += itemScript.bonusJumpSpeed;
         if(itemScript.bonusShield) bonusShieldCount += 1;
@@ -153,6 +154,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(itemScript.duration);
 
         bonusJump -= itemScript.bonusJump;
+        currentJump -= itemScript.bonusJump;
         bonusHorizontalSpeed -= itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed -= itemScript.bonusJumpSpeed;
         if(itemScript.bonusShield) bonusShieldCount -= 1;
