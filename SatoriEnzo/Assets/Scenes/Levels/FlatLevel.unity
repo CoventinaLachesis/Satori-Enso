@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalSpeed: 10
   jumpSpeed: 5
+  shieldObject: {fileID: 0}
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
