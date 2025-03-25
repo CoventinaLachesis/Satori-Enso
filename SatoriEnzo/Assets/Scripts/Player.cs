@@ -103,6 +103,22 @@ public class Player : MonoBehaviour
             Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
         }
 
+        if (collision.gameObject.CompareTag("StageBullet"))
+        {
+
+            PlaySound(hitSound);
+            if (bonusShieldCount > 0)
+            {
+                StageBullet stageBulletScript = collision.gameObject.GetComponent<StageBullet>();
+                stageBulletScript.Deactivate();
+                return;
+            }
+                
+
+            if (immortal == false)
+            Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
+        }
+
         if (collision.gameObject.CompareTag("KillZone"))
         {
             Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
