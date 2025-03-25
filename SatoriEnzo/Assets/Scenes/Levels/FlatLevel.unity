@@ -304,8 +304,11 @@ MonoBehaviour:
   positiveItemPrefabs:
   - {fileID: 8356031512864486038, guid: 8c18d93f89bed71459944722f67a4c59, type: 3}
   - {fileID: 1067630554735440097, guid: 7e223ecdfd95b5a478f47fffc926b328, type: 3}
+  - {fileID: 8356031512864486038, guid: 1fddcf6e5f5dede4aa649ca218ed618d, type: 3}
+  - {fileID: 8356031512864486038, guid: e7bbfbf13f1749f47a09268758f7a88c, type: 3}
   negativeItemPrefabs:
   - {fileID: 259670498764846153, guid: 3c447fb701839f04ca8dd4b5f9086b25, type: 3}
+  - {fileID: 8356031512864486038, guid: b6260685744d07e44b42071008d678a7, type: 3}
   spawnMin: {x: -7, y: -3}
   spawnMax: {x: 7, y: -2}
   spawnInterval: 10
@@ -339,7 +342,7 @@ GameObject:
   - component: {fileID: 356872303}
   m_Layer: 0
   m_Name: StageBulletWave2.3
-  m_TagString: Bullet
+  m_TagString: StageBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -800,7 +803,7 @@ GameObject:
   - component: {fileID: 662036767}
   m_Layer: 0
   m_Name: StageBulletWave2.1
-  m_TagString: Bullet
+  m_TagString: StageBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1792,7 +1795,7 @@ GameObject:
   - component: {fileID: 1348597494}
   m_Layer: 0
   m_Name: StageBulletWave1.1
-  m_TagString: Bullet
+  m_TagString: StageBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1974,7 +1977,7 @@ GameObject:
   - component: {fileID: 1416033899}
   m_Layer: 0
   m_Name: StageBulletWave1.2
-  m_TagString: Bullet
+  m_TagString: StageBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2575,7 +2578,7 @@ GameObject:
   - component: {fileID: 1788751192}
   m_Layer: 0
   m_Name: StageBulletWave1.3
-  m_TagString: Bullet
+  m_TagString: StageBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2757,7 +2760,7 @@ GameObject:
   - component: {fileID: 1881465084}
   m_Layer: 0
   m_Name: StageBulletWave2.2
-  m_TagString: Bullet
+  m_TagString: StageBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
