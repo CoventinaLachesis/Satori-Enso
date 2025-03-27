@@ -50,8 +50,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * (horizontalSpeed + bonusHorizontalSpeed), body.velocity.y);
+        float horizontalInput = Input.GetAxis("Horizontal") * (CheckMovementReversed() ? -1 : 1);
+        body.velocity = new Vector2(horizontalInput * (horizontalSpeed + bonusHorizontalSpeed), body.velocity.y);
 
         if (horizontalInput > 0.01f)
             transform.localScale = new Vector3(playerScale.x, playerScale.y, playerScale.z);
