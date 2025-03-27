@@ -8,7 +8,13 @@ public class Item : MonoBehaviour
     public float bonusHorizontalSpeed = 0;
     public int bonusJump = 0;
     public bool bonusShield = false;
-    public float duration;
+    public bool reverseMovement = false;
+    public bool spawnPlatform = false;
+    public float platformDuration = 0;
+    public Vector2 spawnPlatformOffset = new Vector2(0, 0);
+    public bool platformDissolveEffect = false;
+    public float bonusScale = 0;
+    public float duration = 10;
     public float expireTime = 8;
     public float blinkInterval = 0.2f;
     private float blinkDuration;

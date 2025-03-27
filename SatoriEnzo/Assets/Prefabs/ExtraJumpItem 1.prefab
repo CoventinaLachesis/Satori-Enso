@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2225652346057580444}
   - component: {fileID: 5736550916988696280}
   m_Layer: 0
-  m_Name: JumpSpeedDown
+  m_Name: ExtraJumpItem 1
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c28209973e683b141b0a4af989ac4b47, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62ad35fe181ef8e448487a5c0c4ccc04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,11 +98,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611ef724f85cda64095db36202bc99e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusJumpSpeed: -2
+  bonusJumpSpeed: 0
   bonusHorizontalSpeed: 0
-  bonusJump: 0
+  bonusJump: 1
   bonusShield: 0
+  reverseMovement: 0
+  spawnPlatform: 0
+  spawnPlatformOffset: {x: 0, y: 0}
+  platformDissolutionEffect: 0
+  scaleBonus: 0
   duration: 10
+  expireTime: 8
+  blinkInterval: 0.2
 --- !u!61 &5736550916988696280
 BoxCollider2D:
   m_ObjectHideFlags: 0
