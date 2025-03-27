@@ -312,6 +312,7 @@ MonoBehaviour:
   - {fileID: 8356031512864486038, guid: b6260685744d07e44b42071008d678a7, type: 3}
   - {fileID: 8356031512864486038, guid: aa0d05651431e494faca62f831f46be8, type: 3}
   - {fileID: 8356031512864486038, guid: 0ee7efa45d52aa142a4336e102a8940b, type: 3}
+  - {fileID: 8356031512864486038, guid: 73760f9297f345343a376f43e3f8709f, type: 3}
   spawnMin: {x: -7, y: -3}
   spawnMax: {x: 7, y: -2}
   spawnInterval: 10
@@ -1489,6 +1490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1076679800}
   - component: {fileID: 1076679799}
+  - component: {fileID: 1076679801}
   - component: {fileID: 1076679798}
   - component: {fileID: 1076679797}
   m_Layer: 6
@@ -1629,6 +1631,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1076679801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076679796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f46c97acfbc57a4eadb633844104c17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabledOpacity: 0.2
+  enabledOpacity: 1
 --- !u!1 &1166147046
 GameObject:
   m_ObjectHideFlags: 0

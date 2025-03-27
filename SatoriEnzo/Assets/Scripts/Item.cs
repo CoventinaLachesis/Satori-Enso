@@ -13,6 +13,7 @@ public class Item : MonoBehaviour
     public float platformDuration = 0;
     public Vector2 spawnPlatformOffset = new Vector2(0, 0);
     public bool platformDissolveEffect = false;
+    public float platformDisableDuration = 7;
     public float bonusScale = 0;
     public float duration = 10;
     public float expireTime = 8;

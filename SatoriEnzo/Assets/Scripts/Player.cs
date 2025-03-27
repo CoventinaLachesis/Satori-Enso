@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private float bonusScale = 0;
     private int platformDissolveEffectCounter = 0;
     private int movementReverseCounter = 0;
+    private float platformDisableDuration = 7;
 
     private float bonusShieldCount = 0; 
     private Vector3 initScale;
@@ -88,7 +89,16 @@ public class Player : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Platform"))
         {
-            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) ResetJump(); // Check Above
+            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) // Check Above
+            {
+                if(platformDissolveEffectCounter > 0)
+                {
+                    DissolvePlatform(collision.gameObject, platformDisableDuration);
+                    return;
+                }
+
+                ResetJump(); 
+            } 
             currentPlatform = collision.gameObject;
             anim.SetBool("OnGround", true);
         }
@@ -224,10 +234,24 @@ public class Player : MonoBehaviour
         if(itemScript.platformDissolveEffect)
         {
             platformDissolveEffectCounter += 1;
+            platformDisableDuration = itemScript.platformDisableDuration;
         }
             
 
         StartCoroutine(RevertItemBonus(itemScript));
+    }
+
+    private void DissolvePlatform(GameObject platform, float duration)
+    {
+        Platform platformScript = platform.GetComponent<Platform>();
+
+        if(platformScript == null) 
+        {
+            Debug.LogError("Cannot Find Platform Script");
+            return;
+        }
+
+        platformScript.TempDisablePlatform(duration);
     }
 
     IEnumerator RevertItemBonus(Item itemScript)
