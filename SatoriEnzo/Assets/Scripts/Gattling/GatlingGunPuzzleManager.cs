@@ -36,6 +36,7 @@ public class GatlingGunPuzzleManager : Puzzle
     {
         gatling.deActive();
         spawner.EndPuzzle();
+        collectedParts = 0;
 
     }
 

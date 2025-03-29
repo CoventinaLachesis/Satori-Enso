@@ -7,9 +7,11 @@ public class GatlingGunPartSpawner : MonoBehaviour
     [SerializeField] private string[] groundTags = { "Ground", "Platform" };
     [SerializeField] private float surfaceOffset = 0.5f;
     [SerializeField] private int maxAttempts = 100; // fail-safe in case spawn area is too small
-
+    [SerializeField] private GameObject gatlingBullet;
+    public float spawnBulletInterval;
     private List<Collider2D> groundColliders = new();
     private List<GameObject> spawnedParts = new(); // Stores spawned parts for despawning
+    private List<GameObject> spawnedBullet = new();
 
 
     private void Awake()
@@ -79,12 +81,35 @@ public class GatlingGunPartSpawner : MonoBehaviour
             spawnedParts.Add(part); // Store for despawning        }
         }
     }
+    public void SpawnBullet() {
+        Vector2 spawnPos = Vector2.zero;
+
+        // Pick a random ground
+        Collider2D col = groundColliders[Random.Range(0, groundColliders.Count)];
+        Bounds bounds = col.bounds;
+
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float y = bounds.max.y + surfaceOffset;
+        spawnPos = new Vector2(x, y);
+
+        
+
+        GameObject bullet = Instantiate(gatlingBullet, spawnPos, Quaternion.identity);
+        spawnedBullet.Add(bullet);
+
+    }
+
     private void DespawnAll() {
         foreach (GameObject part in spawnedParts)
         {
             if (part != null) Destroy(part);
         }
+        foreach (GameObject bullet in spawnedBullet)
+        {
+            if (bullet != null) Destroy(bullet);
+        }
         spawnedParts.Clear();
+        spawnedBullet.Clear();
 
     }
 }

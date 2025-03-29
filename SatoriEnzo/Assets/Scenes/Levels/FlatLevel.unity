@@ -1801,14 +1801,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gatlingParts:
-  - {fileID: 3380222835093163166, guid: a50127905a2f2564baef7e519f48ee86, type: 3}
-  - {fileID: 3380222835093163166, guid: a50127905a2f2564baef7e519f48ee86, type: 3}
+  - {fileID: 3380222835093163166, guid: b235358cbcb39f2429e513ff5b22a0d8, type: 3}
+  - {fileID: 3380222835093163166, guid: 38cb0720ad9fae84e94c2c75715d6976, type: 3}
   - {fileID: 3380222835093163166, guid: a50127905a2f2564baef7e519f48ee86, type: 3}
   groundTags:
   - Ground
   - Platform
   surfaceOffset: 0.5
   maxAttempts: 100
+  gatlingBullet: {fileID: 6078938809754439420, guid: 93b959b7f1601e24791e0f9dad078307, type: 3}
+  spawnBulletInterval: 1
 --- !u!4 &1194447228
 Transform:
   m_ObjectHideFlags: 0
