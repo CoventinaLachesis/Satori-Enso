@@ -16,17 +16,25 @@ public class Player : MonoBehaviour
     private int bonusJump = 0;
     private float bonusHorizontalSpeed = 0;
     private float bonusJumpSpeed = 0;
+    private float bonusScale = 0;
+    private int platformDissolveEffectCounter = 0;
+    private int movementReverseCounter = 0;
+    private float platformDisableDuration = 7;
 
     private float bonusShieldCount = 0; 
     private Vector3 initScale;
+    private Vector3 playerScale;
 
     [SerializeField] private GameObject shieldObject;
+    [SerializeField] private GameObject platformDissolverObject;
+    [SerializeField] private GameObject tempPlatform;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] bool immortal=false;    // Drag hit sound here
     [SerializeField] private string endingSceneName = "GameOver"; // Set this in Inspector
     [SerializeField] private AudioClip jumpSound;   // Drag jump sound here
     [SerializeField] private AudioClip hitSound;    // Drag hit sound here
     [SerializeField] private AudioClip getItemSound;    // Drag hit sound here
+    
 
     private AudioSource audioSource;
 
@@ -36,22 +44,23 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
-        shieldObject = transform.GetChild(0).gameObject;
         shieldObject.SetActive(false);
+        platformDissolverObject.SetActive(false);
 
         initScale = transform.localScale;
+        playerScale = initScale;
         ResetJump();
     }
 
     private void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * (horizontalSpeed + bonusHorizontalSpeed), body.velocity.y);
+        float horizontalInput = Input.GetAxis("Horizontal") * (CheckMovementReversed() ? -1 : 1);
+        body.velocity = new Vector2(horizontalInput * (horizontalSpeed + bonusHorizontalSpeed), body.velocity.y);
 
         if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
+            transform.localScale = new Vector3(playerScale.x, playerScale.y, playerScale.z);
         else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-initScale.x, initScale.y, initScale.z);
+            transform.localScale = new Vector3(-playerScale.x, playerScale.y, playerScale.z);
 
         if (Input.GetKeyDown(KeyCode.Space) && CheckJump())
         {
@@ -83,7 +92,16 @@ public class Player : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Platform"))
         {
-            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) ResetJump(); // Check Above
+            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) // Check Above
+            {
+                if(platformDissolveEffectCounter > 0)
+                {
+                    DissolvePlatform(collision.gameObject, platformDisableDuration);
+                    return;
+                }
+
+                ResetJump(); 
+            } 
             currentPlatform = collision.gameObject;
             anim.SetBool("OnGround", true);
         }
@@ -162,6 +180,32 @@ public class Player : MonoBehaviour
             audioSource.PlayOneShot(clip); // Play sound once
         }
     }
+    
+    private bool CheckMovementReversed()
+    {
+        return movementReverseCounter > 0;
+    }
+
+    private void SpawnTempPlatform(float duration, Vector2 offset)
+    {
+        // Spawn Platform
+        Debug.Log("Spawn Platform with Duration of " + duration + " at " + offset + " of player position.");
+
+        GameObject tempPlatformObject = Instantiate(
+            tempPlatform, 
+            new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z),
+            Quaternion.identity
+        );
+
+        Platform platformScript = tempPlatformObject.GetComponent<Platform>();
+        platformScript.WaitAndDestroy(duration);
+    }
+
+    private void Resize()
+    {
+        playerScale = new Vector3(initScale.x + bonusScale, initScale.y + bonusScale, playerScale.z);
+        transform.localScale = playerScale;
+    }
 
     private void ApplyItemBonus(GameObject Item)
     {
@@ -176,10 +220,34 @@ public class Player : MonoBehaviour
         currentJump += itemScript.bonusJump;
         bonusHorizontalSpeed += itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed += itemScript.bonusJumpSpeed;
+
+        if(itemScript.bonusScale != 0)
+        {
+            bonusScale += itemScript.bonusScale;
+            Resize();
+        }
+        
         if(itemScript.bonusShield) 
         {
             bonusShieldCount += 1;
             shieldObject.SetActive(true);
+        }
+
+        if(itemScript.reverseMovement)
+        {
+            movementReverseCounter += 1;
+        }
+
+        if(itemScript.spawnPlatform)
+        {
+            SpawnTempPlatform(itemScript.platformDuration, itemScript.spawnPlatformOffset);
+        }
+
+        if(itemScript.platformDissolveEffect)
+        {
+            platformDissolveEffectCounter += 1;
+            platformDisableDuration = itemScript.platformDisableDuration;
+            platformDissolverObject.SetActive(true);
         }
             
 
@@ -194,8 +262,29 @@ public class Player : MonoBehaviour
         currentJump -= itemScript.bonusJump;
         bonusHorizontalSpeed -= itemScript.bonusHorizontalSpeed;
         bonusJumpSpeed -= itemScript.bonusJumpSpeed;
+        if(itemScript.bonusScale != 0)
+        {
+            bonusScale -= itemScript.bonusScale;
+            Resize();
+        }
         if(itemScript.bonusShield) bonusShieldCount -= 1;
         if(bonusShieldCount == 0) shieldObject.SetActive(false);
+        if(itemScript.reverseMovement) movementReverseCounter -= 1;
+        if(itemScript.platformDissolveEffect) platformDissolveEffectCounter -=1;
+        if(platformDissolveEffectCounter == 0) platformDissolverObject.SetActive(false);
+    }
+
+    private void DissolvePlatform(GameObject platform, float duration)
+    {
+        Platform platformScript = platform.GetComponent<Platform>();
+
+        if(platformScript == null) 
+        {
+            Debug.LogError("Cannot Find Platform Script");
+            return;
+        }
+
+        platformScript.TempDisablePlatform(duration);
     }
 
     IEnumerator DisablePlatformCollision()
@@ -206,4 +295,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
     }
+
+    
 }
