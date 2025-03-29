@@ -6,6 +6,7 @@ public class Platform : MonoBehaviour
 {
     [SerializeField] private float disabledOpacity = 0.1f;
     [SerializeField] private float enabledOpacity = 1f;
+    [SerializeField] private Color tempColor;
     private BoxCollider2D platformCollider;
     private SpriteRenderer spriteRenderer;
 
@@ -17,6 +18,8 @@ public class Platform : MonoBehaviour
 
     public void WaitAndDestroy(float duration)
     {
+        Debug.Log(tempColor);
+        spriteRenderer.color = tempColor;
         StartCoroutine(DestroyPlatform(duration));
     }
 

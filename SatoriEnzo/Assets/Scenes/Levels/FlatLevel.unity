@@ -3227,6 +3227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medium Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 5428130259662775198, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
+      propertyPath: tempColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3375,3 +3379,4 @@ SceneRoots:
   - {fileID: 421022455}
   - {fileID: 272331620}
   - {fileID: 1194447228}
+  - {fileID: 2078608299}

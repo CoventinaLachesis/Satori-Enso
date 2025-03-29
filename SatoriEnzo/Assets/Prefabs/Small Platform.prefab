@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disabledOpacity: 0.2
   enabledOpacity: 1
+  tempColor: {r: 0.39607844, g: 1, b: 0.6666667, a: 1}
 --- !u!61 &2443191232357666332
 BoxCollider2D:
   m_ObjectHideFlags: 0
