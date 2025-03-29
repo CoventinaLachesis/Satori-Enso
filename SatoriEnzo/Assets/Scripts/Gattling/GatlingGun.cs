@@ -81,7 +81,7 @@ public class GatlingGun : MonoBehaviour
         currentAmmo--;
     }
 
-    public void deActive() {
+    public void Deactive() {
         if (auraInstance != null)
         {
             Destroy(auraInstance);

@@ -9,11 +9,12 @@ public class GatlingGunPuzzleManager : Puzzle
     private GatlingGunPartSpawner spawner;
 
 
-    private void Awake() {
+    private void Awake() 
+    {
         gatling = FindObjectOfType<GatlingGun>();
         spawner = FindObjectOfType<GatlingGunPartSpawner>();
-
     }
+
     public void CollectPart()
     {
         collectedParts++;
@@ -34,14 +35,10 @@ public class GatlingGunPuzzleManager : Puzzle
 
     public override void EndPuzzle()
     {
-        gatling.deActive();
+        gatling.Deactive();
         spawner.EndPuzzle();
         collectedParts = 0;
 
     }
-
-
-
-
 }
 
