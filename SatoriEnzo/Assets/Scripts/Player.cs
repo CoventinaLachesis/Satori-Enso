@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     private Vector3 playerScale;
 
     [SerializeField] private GameObject shieldObject;
+    [SerializeField] private GameObject platformDissolverObject;
     [SerializeField] private GameObject tempPlatform;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] bool immortal=false;    // Drag hit sound here
@@ -43,8 +44,8 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
-        shieldObject = transform.GetChild(0).gameObject;
         shieldObject.SetActive(false);
+        platformDissolverObject.SetActive(false);
 
         initScale = transform.localScale;
         playerScale = initScale;
@@ -246,6 +247,7 @@ public class Player : MonoBehaviour
         {
             platformDissolveEffectCounter += 1;
             platformDisableDuration = itemScript.platformDisableDuration;
+            platformDissolverObject.SetActive(true);
         }
             
 
@@ -269,6 +271,7 @@ public class Player : MonoBehaviour
         if(bonusShieldCount == 0) shieldObject.SetActive(false);
         if(itemScript.reverseMovement) movementReverseCounter -= 1;
         if(itemScript.platformDissolveEffect) platformDissolveEffectCounter -=1;
+        if(platformDissolveEffectCounter == 0) platformDissolverObject.SetActive(false);
     }
 
     private void DissolvePlatform(GameObject platform, float duration)
