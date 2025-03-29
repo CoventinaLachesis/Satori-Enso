@@ -15,10 +15,11 @@ public class GatlingGun : MonoBehaviour
     public GameObject gatlingAuraPrefab; // assign in Inspector
     public GameObject auraInstance;
     private GatlingGunPartSpawner spawner;
-
+    private GatlingGunPuzzleManager manager;
 
     private void Awake() {
         spawner = FindObjectOfType<GatlingGunPartSpawner>();
+        manager = FindObjectOfType<GatlingGunPuzzleManager>();
     
     }
     void ActivateGatlingGun()
@@ -63,7 +64,7 @@ public class GatlingGun : MonoBehaviour
                 auraInstance = null;
             }
             isFiring = false;
-            spawner.SpawnParts();
+            //spawner.SpawnParts();
         }
     }
     void Shoot()
@@ -71,5 +72,17 @@ public class GatlingGun : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * 10f;
         currentAmmo--;
+    }
+
+    public void deActive() {
+        if (auraInstance != null)
+        {
+            Destroy(auraInstance);
+            auraInstance = null;
+        }
+        isFiring = false;
+        currentAmmo = 0;
+        //spawner.SpawnParts();
+
     }
 }

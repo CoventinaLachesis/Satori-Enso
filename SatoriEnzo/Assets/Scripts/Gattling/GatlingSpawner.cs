@@ -9,11 +9,19 @@ public class GatlingGunPartSpawner : MonoBehaviour
     [SerializeField] private int maxAttempts = 100; // fail-safe in case spawn area is too small
 
     private List<Collider2D> groundColliders = new();
+    private List<GameObject> spawnedParts = new(); // Stores spawned parts for despawning
 
-    private void Start()
+
+    private void Awake()
     {
         FindGrounds();
+    }
+
+    public void StartPuzzle() { 
         SpawnParts();
+    }
+    public void EndPuzzle() {
+        DespawnAll();
     }
 
     private void FindGrounds()
@@ -67,7 +75,16 @@ public class GatlingGunPartSpawner : MonoBehaviour
                 attempts++;
             }
 
-            Instantiate(gatlingParts[i], spawnPos, Quaternion.identity);
+            GameObject part = Instantiate(gatlingParts[i], spawnPos, Quaternion.identity);
+            spawnedParts.Add(part); // Store for despawning        }
         }
+    }
+    private void DespawnAll() {
+        foreach (GameObject part in spawnedParts)
+        {
+            if (part != null) Destroy(part);
+        }
+        spawnedParts.Clear();
+
     }
 }

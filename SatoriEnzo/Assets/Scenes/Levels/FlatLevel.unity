@@ -202,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzles:
   - {fileID: 324732229}
+  - {fileID: 272331618}
   spawnInterval: 5
   puzzleDuration: 5
 --- !u!4 &170643850
@@ -249,8 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76806d38a55321644b298ad9ff6784a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 666916973}
+  boss: {fileID: 1503794742}
   gatlingGunPrefab: {fileID: 2745972130908957081, guid: 402a21b1ea70c004682b575864f5b570, type: 3}
-  player: {fileID: 666916975}
   requiredParts: 3
 --- !u!4 &272331620
 Transform:
@@ -2424,9 +2426,9 @@ MonoBehaviour:
     motionType: 0
     waveFrequency: 4.33
     waveAmplitude: 2.25
-    initialRadius: 0
-    expansionRate: 0
-    sizeIncreaseRate: 0
+    initialRadius: 1.44
+    expansionRate: 2.84
+    sizeIncreaseRate: 0.8
     spirals: 3
     rings: 0
     shootDirection: 0

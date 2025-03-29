@@ -10,10 +10,10 @@ public class AmmoPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GatlingGunPuzzleManager manager = FindObjectOfType<GatlingGunPuzzleManager>();
-            if (manager != null)
+            GatlingGun gatling = FindObjectOfType<GatlingGun>();
+            if (gatling != null)
             {
-                manager.AddAmmo(ammoAmount);
+                gatling.AddAmmo(ammoAmount);
             }
 
             Destroy(gameObject);
