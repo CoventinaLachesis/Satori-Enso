@@ -15,6 +15,11 @@ public class Platform : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    public void WaitAndDestroy(float duration)
+    {
+        StartCoroutine(DestroyPlatform(duration));
+    }
+
     public void TempDisablePlatform(float duration)
     {
         DisablePlatform();
@@ -25,6 +30,12 @@ public class Platform : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         EnablePlatform();
+    }
+
+    IEnumerator DestroyPlatform(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
     }
 
     public void DisablePlatform()

@@ -26,12 +26,14 @@ public class Player : MonoBehaviour
     private Vector3 playerScale;
 
     [SerializeField] private GameObject shieldObject;
+    [SerializeField] private GameObject tempPlatform;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] bool immortal=false;    // Drag hit sound here
     [SerializeField] private string endingSceneName = "GameOver"; // Set this in Inspector
     [SerializeField] private AudioClip jumpSound;   // Drag jump sound here
     [SerializeField] private AudioClip hitSound;    // Drag hit sound here
     [SerializeField] private AudioClip getItemSound;    // Drag hit sound here
+    
 
     private AudioSource audioSource;
 
@@ -187,6 +189,15 @@ public class Player : MonoBehaviour
     {
         // Spawn Platform
         Debug.Log("Spawn Platform with Duration of " + duration + " at " + offset + " of player position.");
+
+        GameObject tempPlatformObject = Instantiate(
+            tempPlatform, 
+            new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z),
+            Quaternion.identity
+        );
+
+        Platform platformScript = tempPlatformObject.GetComponent<Platform>();
+        platformScript.WaitAndDestroy(duration);
     }
 
     private void Resize()
@@ -241,19 +252,6 @@ public class Player : MonoBehaviour
         StartCoroutine(RevertItemBonus(itemScript));
     }
 
-    private void DissolvePlatform(GameObject platform, float duration)
-    {
-        Platform platformScript = platform.GetComponent<Platform>();
-
-        if(platformScript == null) 
-        {
-            Debug.LogError("Cannot Find Platform Script");
-            return;
-        }
-
-        platformScript.TempDisablePlatform(duration);
-    }
-
     IEnumerator RevertItemBonus(Item itemScript)
     {
         yield return new WaitForSeconds(itemScript.duration);
@@ -271,6 +269,19 @@ public class Player : MonoBehaviour
         if(bonusShieldCount == 0) shieldObject.SetActive(false);
         if(itemScript.reverseMovement) movementReverseCounter -= 1;
         if(itemScript.platformDissolveEffect) platformDissolveEffectCounter -=1;
+    }
+
+    private void DissolvePlatform(GameObject platform, float duration)
+    {
+        Platform platformScript = platform.GetComponent<Platform>();
+
+        if(platformScript == null) 
+        {
+            Debug.LogError("Cannot Find Platform Script");
+            return;
+        }
+
+        platformScript.TempDisablePlatform(duration);
     }
 
     IEnumerator DisablePlatformCollision()
