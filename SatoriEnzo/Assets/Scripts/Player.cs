@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
                 
 
             if (immortal == false)
-            Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
+            Invoke(nameof(Death), 0.5f); // Delay scene transition
         }
 
         if (collision.gameObject.CompareTag("StageBullet"))
@@ -134,12 +134,12 @@ public class Player : MonoBehaviour
                 
 
             if (immortal == false)
-            Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
+            Invoke(nameof(Death), 0.5f); // Delay scene transition
         }
 
         if (collision.gameObject.CompareTag("KillZone"))
         {
-            Invoke(nameof(GoToEnding), 0.5f); // Delay scene transition
+            Invoke(nameof(Death), 0.5f); // Delay scene transition
         }
 
         if (collision.gameObject.CompareTag("Item"))
@@ -169,6 +169,10 @@ public class Player : MonoBehaviour
         return currentJump > 0;
     }
 
+    public void Death()
+    {
+        GoToEnding();
+    }
     private void GoToEnding()
     {
         SceneManager.LoadScene(endingSceneName);
