@@ -11,6 +11,7 @@ public class GatlingGun : MonoBehaviour
     public int currentAmmo = 0;
 
     private float shootTimer = 0f;
+    private float spawnBulletTimer = 0f;
     private bool isFiring = false;
     public GameObject gatlingAuraPrefab; // assign in Inspector
     public GameObject auraInstance;
@@ -50,10 +51,16 @@ public class GatlingGun : MonoBehaviour
         if (currentAmmo > 0)
         {
             shootTimer -= Time.deltaTime;
+            spawnBulletTimer -= Time.deltaTime;
             if (shootTimer <= 0f)
             {
                 Shoot();
                 shootTimer = shootInterval;
+            }
+            if (spawnBulletTimer <= 0f)
+            {
+                spawner.SpawnBullet();
+                spawnBulletTimer = spawner.spawnBulletInterval;
             }
         }
         else

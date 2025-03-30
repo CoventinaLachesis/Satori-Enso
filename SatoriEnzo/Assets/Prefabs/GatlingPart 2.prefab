@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5577501270643539154}
   - component: {fileID: 8053702688930777381}
   m_Layer: 0
-  m_Name: GatlingPart
+  m_Name: GatlingPart 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b1ce50fad16d38a47af14de12f74b189, type: 3}
+  m_Sprite: {fileID: 1370102511, guid: 4d1092f8294f3ef46acdbbf8dae1a041, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 1.83, y: 2.98}
     newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
