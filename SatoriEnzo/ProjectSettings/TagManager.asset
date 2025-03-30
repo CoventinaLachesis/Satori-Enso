@@ -11,6 +11,8 @@ TagManager:
   - Platform
   - KillZone
   - StageBullet
+  - Correct
+  - Wrong
   layers:
   - Default
   - TransparentFX

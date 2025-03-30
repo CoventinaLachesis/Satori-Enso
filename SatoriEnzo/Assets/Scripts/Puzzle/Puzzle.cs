@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Puzzle : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject boss;
+    public Player player;
+    public BossPattern boss;
 
     public abstract void InitPuzzle();
     public abstract void EndPuzzle();
