@@ -6,7 +6,6 @@ public class PlatformMovementPosition : PlatformPattern
 {
     [SerializeField] private MovingPlatform[] movingPlatforms;
     
-    private PlatformMovementState state = PlatformMovementState.None;
     private GameObject[] platforms;
     public override void StartPattern()
     {
@@ -21,19 +20,65 @@ public class PlatformMovementPosition : PlatformPattern
                 new Vector3(movingPlatforms[i].spawnPosition.x, movingPlatforms[i].spawnPosition.y, 0), 
                 Quaternion.identity
             );
+            movingPlatforms[i].State = PlatformMovementState.Start;
         }
-        state = PlatformMovementState.Start;
     }
 
     public override void EndPattern()
     {
-        state = PlatformMovementState.End;
+        for(int i = 0; i < movingPlatforms.Length; i++)
+        {
+            movingPlatforms[i].State = PlatformMovementState.End;
+        }
     }
 
     void Update()
     {
-        if(state == PlatformMovementState.Start) MoveAtStart();
-        if(state == PlatformMovementState.End) MoveAtEnd();
+        if(platforms == null) return;
+
+        for(int i = 0; i < platforms.Length; i++)
+        {
+            MovePlatform(i);
+        }
+    }
+
+    private void MovePlatform(int i)
+    {
+        if(movingPlatforms[i].State == PlatformMovementState.None || movingPlatforms[i].State == PlatformMovementState.Stop) return;
+
+        if(movingPlatforms[i].State == PlatformMovementState.Start)
+        {
+            if( Vector3.Distance(movingPlatforms[i].stagePosition, platforms[i].gameObject.transform.position) < 0.1f )
+            {
+                platforms[i].gameObject.transform.position = movingPlatforms[i].stagePosition;
+                movingPlatforms[i].State = PlatformMovementState.Stop;
+                return;
+            }
+
+            MoveToward(platforms[i], movingPlatforms[i].stagePosition, movingPlatforms[i].enterSpeed);
+        }
+
+        if(movingPlatforms[i].State == PlatformMovementState.End)
+        {
+            if( Vector3.Distance(movingPlatforms[i].spawnPosition, platforms[i].gameObject.transform.position) < 0.1f )
+            {
+                Destroy(platforms[i]);
+                movingPlatforms[i].State = PlatformMovementState.None;
+                return;
+            }
+
+            MoveToward(platforms[i], movingPlatforms[i].spawnPosition, movingPlatforms[i].enterSpeed);
+        }
+    }
+
+    private void MoveToward(GameObject platform, Vector2 target, float speed)
+    {
+        Vector3 movingVector = Vector3.MoveTowards(
+            platform.gameObject.transform.position,
+            target, 
+            speed * Time.deltaTime
+        );
+        platform.gameObject.transform.position = movingVector;
     }
 
     private void MoveAtStart()
@@ -64,10 +109,17 @@ public class PlatformMovementPosition : PlatformPattern
 }
 
 [System.Serializable]
-public struct MovingPlatform
+public class MovingPlatform
 {
     public GameObject platformPrefab;
     public Vector2 spawnPosition;
     public Vector2 stagePosition;
     public float enterSpeed;
+    private PlatformMovementState state = PlatformMovementState.None;
+
+    public PlatformMovementState State
+    {
+        get{ return state; }
+        set{ state = value; }
+    }
 }

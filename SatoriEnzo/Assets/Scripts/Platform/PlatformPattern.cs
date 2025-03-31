@@ -13,6 +13,7 @@ public abstract class PlatformPattern : MonoBehaviour
 public enum PlatformMovementState
 {
     Start,
+    Stop,
     Loop,
     End,
     None // When Platforms are not initiated
