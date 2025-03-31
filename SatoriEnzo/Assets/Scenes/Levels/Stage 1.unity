@@ -439,6 +439,9 @@ MonoBehaviour:
   cannonPrefab: {fileID: 1697921259061201299, guid: 96bd561e9ec6a424983ddafc7d40dc45, type: 3}
   cannonBallItemPrefab: {fileID: 3380222835093163166, guid: 9934aa3655f47674aa64d4b41edcad48, type: 3}
   cannonBallProjectilePrefab: {fileID: 4763697788639711798, guid: 788fa666630672e41ab640e5769aa3d7, type: 3}
+  groundTags:
+  - Ground
+  surfaceOffset: 0.5
   explosionVFX: {fileID: 4593184484909914550, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
   shootSound: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
   spawnMin: {x: -7, y: -2.52}
@@ -500,8 +503,9 @@ MonoBehaviour:
   - {fileID: 8356031512864486038, guid: aa0d05651431e494faca62f831f46be8, type: 3}
   - {fileID: 8356031512864486038, guid: 0ee7efa45d52aa142a4336e102a8940b, type: 3}
   - {fileID: 8356031512864486038, guid: 73760f9297f345343a376f43e3f8709f, type: 3}
-  spawnMin: {x: -7, y: -3}
-  spawnMax: {x: 7, y: -2}
+  spawnAreas:
+  - min: {x: -7, y: -2.5}
+    max: {x: 7, y: -2}
   spawnInterval: 10
 --- !u!4 &352007178
 Transform:
@@ -733,6 +737,7 @@ MonoBehaviour:
   - {fileID: 732396963}
   - {fileID: 744545833}
   - {fileID: 937431599}
+  - {fileID: 1425398584}
   spawnInterval: 5
 --- !u!4 &408671752
 Transform:
@@ -750,6 +755,7 @@ Transform:
   - {fileID: 732396965}
   - {fileID: 744545834}
   - {fileID: 937431600}
+  - {fileID: 1425398586}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &421022454
@@ -1699,16 +1705,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 15
-  platformPrefabs:
-  - {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
-  - {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
-  spawnPositions:
-  - {x: 14, y: -1.5}
-  - {x: -13, y: -1.5}
-  constantPositions:
-  - {x: 5, y: -1.5}
-  - {x: -4, y: -1.5}
-  speed: 10
+  movingPlatforms:
+  - platformPrefab: {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
+    spawnPosition: {x: 14, y: -1.5}
+    stagePosition: {x: 5, y: -1.5}
+    enterSpeed: 3
+  - platformPrefab: {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
+    spawnPosition: {x: -13, y: -1.5}
+    stagePosition: {x: -4, y: -1.5}
+    enterSpeed: 3
 --- !u!4 &732396965
 Transform:
   m_ObjectHideFlags: 0
@@ -1769,6 +1774,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 15
+  movingPlatforms:
+  - platformPrefab: {fileID: 5289605104003408391, guid: f93b49752676f5e47a8b66c2af12f9a4, type: 3}
+    spawnPosition: {x: 0, y: -6}
+    stagePosition: {x: 0, y: -1.5}
+    enterSpeed: 3
   platformPrefabs:
   - {fileID: 5289605104003408391, guid: f93b49752676f5e47a8b66c2af12f9a4, type: 3}
   spawnPositions:
@@ -1967,19 +1977,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 15
-  platformPrefabs:
-  - {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
-  - {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
-  - {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
-  spawnPositions:
-  - {x: 0, y: -6}
-  - {x: 14, y: -0.6}
-  - {x: -14, y: -0.6}
-  constantPositions:
-  - {x: 0, y: -1.5}
-  - {x: 4.5, y: -0.6}
-  - {x: -4.5, y: -0.6}
-  speed: 10
+  movingPlatforms:
+  - platformPrefab: {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
+    spawnPosition: {x: 0, y: -6}
+    stagePosition: {x: 0, y: -1.5}
+    enterSpeed: 3
+  - platformPrefab: {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
+    spawnPosition: {x: 14, y: -0.6}
+    stagePosition: {x: 4.5, y: -0.6}
+    enterSpeed: 3
+  - platformPrefab: {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
+    spawnPosition: {x: -14, y: -0.6}
+    stagePosition: {x: -4.5, y: -0.6}
+    enterSpeed: 3
 --- !u!1 &992346384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,6 +2857,61 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1476826408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1425398584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1425398586}
+  - component: {fileID: 1425398585}
+  m_Layer: 0
+  m_Name: PlatformLoop1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1425398585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425398584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac924035d2a963947b7f5127e94d1c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 30
+  loopPlatforms:
+  - platformPrefab: {fileID: 5289605104003408391, guid: f93b49752676f5e47a8b66c2af12f9a4, type: 3}
+    spawnPosition: {x: 13, y: -1.5}
+    loopPositions:
+    - {x: -9.5, y: -1.5}
+    - {x: -9.5, y: -5}
+    - {x: 9.5, y: -5}
+    - {x: 9.5, y: -1.5}
+    enterSpeed: 3
+    loopSpeed: 3
+--- !u!4 &1425398586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425398584}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.086092, y: -0.025188744, z: 0.022098765}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 408671752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1476826406
 GameObject:

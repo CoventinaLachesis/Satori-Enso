@@ -6,8 +6,7 @@ public class ItemSpawner : MonoBehaviour
 {
     public GameObject[] positiveItemPrefabs;
     public GameObject[] negativeItemPrefabs;
-    public Vector2 spawnMin; // Bottom Left
-    public Vector2 spawnMax; // Top Right
+    public SpawnArea[] spawnAreas;
     public float spawnInterval;
     private ItemType nextItem = ItemType.Positive;
 
@@ -18,8 +17,10 @@ public class ItemSpawner : MonoBehaviour
 
     void SpawnItem()
     {
-        float randomX = Random.Range(spawnMin.x, spawnMax.x);
-        float randomY = Random.Range(spawnMin.y, spawnMax.y);
+        SpawnArea area = spawnAreas[Random.Range(0, spawnAreas.Length)];
+
+        float randomX = Random.Range(area.min.x, area.max.x);
+        float randomY = Random.Range(area.min.y, area.max.y);
         Vector3 spawnPoint = new Vector3(randomX, randomY, 0);
 
         if(nextItem == ItemType.Positive)
@@ -40,4 +41,11 @@ public enum ItemType
 {
     Positive,
     Negative
+}
+
+[System.Serializable]
+public struct SpawnArea
+{
+    public Vector2 min;
+    public Vector2 max;
 }
