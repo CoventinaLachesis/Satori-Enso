@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class PlatformMovementPosition : PlatformPattern
 {
-    [SerializeField] private GameObject[] platformPrefabs;
+    [SerializeField] private MovingPlatform[] movingPlatforms;
     
-    [SerializeField] private Vector2[] spawnPositions;
-    [SerializeField] private Vector2[] constantPositions;
-    public float speed;
     private PlatformMovementState state = PlatformMovementState.None;
     private GameObject[] platforms;
     public override void StartPattern()
     {
-        if(platformPrefabs == null) return;
+        if(movingPlatforms == null) return;
         
-        platforms = new GameObject[platformPrefabs.Length];
+        platforms = new GameObject[movingPlatforms.Length];
 
-        for(int i = 0; i < platformPrefabs.Length; i++)
+        for(int i = 0; i < movingPlatforms.Length; i++)
         {
-            platforms[i] = Instantiate(platformPrefabs[i], new Vector3(spawnPositions[i].x, spawnPositions[i].y, 0), Quaternion.identity);
+            platforms[i] = Instantiate(
+                movingPlatforms[i].platformPrefab, 
+                new Vector3(movingPlatforms[i].spawnPosition.x, movingPlatforms[i].spawnPosition.y, 0), 
+                Quaternion.identity
+            );
         }
         state = PlatformMovementState.Start;
     }
@@ -39,7 +40,11 @@ public class PlatformMovementPosition : PlatformPattern
     {
         for(int i = 0; i < platforms.Length; i++)
         {
-            Vector3 movingVector = Vector3.MoveTowards(platforms[i].gameObject.transform.position, constantPositions[i], speed * Time.deltaTime);
+            Vector3 movingVector = Vector3.MoveTowards(
+                platforms[i].gameObject.transform.position, 
+                movingPlatforms[i].stagePosition, 
+                movingPlatforms[i].enterSpeed * Time.deltaTime
+            );
             platforms[i].gameObject.transform.position = movingVector;
         }
     }
@@ -48,7 +53,11 @@ public class PlatformMovementPosition : PlatformPattern
     {
         for(int i = 0; i < platforms.Length; i++)
         {
-            Vector3 movingVector = Vector3.MoveTowards(platforms[i].gameObject.transform.position, spawnPositions[i], speed * Time.deltaTime);
+            Vector3 movingVector = Vector3.MoveTowards(
+                platforms[i].gameObject.transform.position, 
+                movingPlatforms[i].spawnPosition, 
+                movingPlatforms[i].enterSpeed * Time.deltaTime
+            );
             platforms[i].gameObject.transform.position = movingVector;
         }
     }
@@ -59,4 +68,13 @@ public enum PlatformMovementState
     Start,
     End,
     None // When Platforms are not initiated
+}
+
+[System.Serializable]
+public struct MovingPlatform
+{
+    public GameObject platformPrefab;
+    public Vector2 spawnPosition;
+    public Vector2 stagePosition;
+    public float enterSpeed;
 }

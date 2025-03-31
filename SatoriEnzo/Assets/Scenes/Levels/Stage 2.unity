@@ -838,8 +838,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformMovingPatterns:
   - {fileID: 732396963}
-  - {fileID: 744545833}
-  - {fileID: 937431599}
   spawnInterval: 5
 --- !u!4 &408671752
 Transform:
@@ -1775,16 +1773,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 15
-  platformPrefabs:
-  - {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
-  - {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
-  spawnPositions:
-  - {x: 14, y: -1.5}
-  - {x: -13, y: -1.5}
-  constantPositions:
-  - {x: 5, y: -1.5}
-  - {x: -4, y: -1.5}
-  speed: 10
+  movingPlatforms:
+  - platformPrefab: {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
+    spawnPosition: {x: 14, y: -1.5}
+    stagePosition: {x: 5, y: -1.5}
+    enterSpeed: 10
+  - platformPrefab: {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
+    spawnPosition: {x: -13, y: -1.5}
+    stagePosition: {x: -4, y: -1.5}
+    enterSpeed: 10
 --- !u!4 &732396965
 Transform:
   m_ObjectHideFlags: 0
@@ -1845,13 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 15
-  platformPrefabs:
-  - {fileID: 5289605104003408391, guid: f93b49752676f5e47a8b66c2af12f9a4, type: 3}
-  spawnPositions:
-  - {x: 0, y: -6}
-  constantPositions:
-  - {x: 0, y: -1.5}
-  speed: 10
+  movingPlatforms: []
 --- !u!1 &803783965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,19 +2003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 15
-  platformPrefabs:
-  - {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
-  - {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
-  - {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
-  spawnPositions:
-  - {x: 0, y: -6}
-  - {x: 14, y: -0.6}
-  - {x: -14, y: -0.6}
-  constantPositions:
-  - {x: 0, y: -1.5}
-  - {x: 4.5, y: -0.6}
-  - {x: -4.5, y: -0.6}
-  speed: 10
+  movingPlatforms: []
 --- !u!1 &992346384
 GameObject:
   m_ObjectHideFlags: 0
