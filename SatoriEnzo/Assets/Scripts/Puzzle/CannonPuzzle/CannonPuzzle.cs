@@ -18,6 +18,9 @@ public class CannonPuzzle : Puzzle
     private CannonBallProjectile cannonBallProjectileScript;
     private bool isActive;
     private bool isCannonBallRetrieved;
+    private List<Collider2D> groundColliders = new();
+    [SerializeField] private string[] groundTags = { "Ground" };
+    [SerializeField] private float surfaceOffset = 0.5f;
     [SerializeField] ParticleSystem explosionVFX;
     [SerializeField] private AudioClip shootSound;
 
@@ -30,16 +33,9 @@ public class CannonPuzzle : Puzzle
     {
         isCannonBallRetrieved = false;
 
-        float randomX = Random.Range(spawnMin.x, spawnMax.x);
-        float randomY = Random.Range(spawnMin.y, spawnMax.y);
-        Vector3 spawnPoint = new Vector3(randomX, randomY, 0);
-        cannon = Instantiate(cannonPrefab, spawnPoint, Quaternion.identity);
-
-        randomX = Random.Range(spawnMin.x, spawnMax.x);
-        randomY = Random.Range(spawnMin.y, spawnMax.y);
-        spawnPoint = new Vector3(randomX, randomY, 0);
-        cannonBallItem = Instantiate(cannonBallItemPrefab, spawnPoint, Quaternion.identity);
-
+        FindGrounds();
+        SpawnCannon();
+        SpawnCannonBall();
         LoadScript();
 
         isActive = true;
@@ -75,6 +71,28 @@ public class CannonPuzzle : Puzzle
         }
     }
 
+    private void SpawnCannon()
+    {
+        Collider2D col = groundColliders[Random.Range(0, groundColliders.Count)];
+        Bounds bounds = col.bounds;
+
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float y = bounds.max.y + surfaceOffset;
+        Vector3 spawnPoint = new Vector3(x, y, 0);
+        cannon = Instantiate(cannonPrefab, spawnPoint, Quaternion.identity);
+    }
+
+    private void SpawnCannonBall()
+    {
+        Collider2D col = groundColliders[Random.Range(0, groundColliders.Count)];
+        Bounds bounds = col.bounds;
+
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float y = bounds.max.y + surfaceOffset;
+        Vector3 spawnPoint = new Vector3(x, y, 0);
+        cannonBallItem = Instantiate(cannonBallItemPrefab, spawnPoint, Quaternion.identity);
+    }
+
     private void Shoot()
     {
         cannonScript.RotateToTarget(boss.transform.position);
@@ -92,8 +110,6 @@ public class CannonPuzzle : Puzzle
 
     private void LoadScript()
     {
-        Debug.Log("Finding Scripts...");
-
         if(cannon == null)
         {
             Debug.LogError("Cannot find Cannon GameObject. Be sure to assign it");
@@ -114,6 +130,22 @@ public class CannonPuzzle : Puzzle
         if(cannonScript == null)
         {
             Debug.LogError("Cannot find Cannon Script");
+        }
+    }
+
+    private void FindGrounds()
+    {
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            foreach (string tag in groundTags)
+            {
+                if (obj.CompareTag(tag) && obj.TryGetComponent(out Collider2D col))
+                {
+                    groundColliders.Add(col);
+                }
+            }
         }
     }
 }
