@@ -71,7 +71,7 @@ public class PlatformMovementLoop : PlatformPattern
         {
             if( Vector3.Distance(loopPlatforms[i].spawnPosition, platforms[i].gameObject.transform.position) < 0.1f ) 
             {
-                Destroy(platforms[i]);
+                Destroy(platforms[i].gameObject);
                 loopPlatforms[i].State = PlatformMovementState.None;
                 return;
             }
