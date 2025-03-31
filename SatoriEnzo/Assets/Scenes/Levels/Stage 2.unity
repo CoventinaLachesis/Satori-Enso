@@ -470,7 +470,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 666916973}
   boss: {fileID: 1503794742}
-  gatlingGunPrefab: {fileID: 2745972130908957081, guid: 402a21b1ea70c004682b575864f5b570, type: 3}
   requiredParts: 3
 --- !u!4 &272331620
 Transform:
@@ -503,9 +502,8 @@ MonoBehaviour:
   player: {fileID: 666916975}
   bulletPrefab: {fileID: 5076178948458269621, guid: 1496cbb13846d3d4f88b8a8a9fe5b67a, type: 3}
   shootInterval: 0.2
-  currentAmmo: 0
+  damagePerBullet: 2
   gatlingAuraPrefab: {fileID: 2745972130908957081, guid: 402a21b1ea70c004682b575864f5b570, type: 3}
-  auraInstance: {fileID: 0}
 --- !u!1 &324732229
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +895,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformMovingPatterns:
+  - {fileID: 732396963}
+  - {fileID: 1353427883}
+  - {fileID: 403671085}
   - {fileID: 1223050496}
   - {fileID: 718042703}
   spawnInterval: 5
@@ -2130,6 +2131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 666916978}
   boss: {fileID: 1503794747}
+  damage: 20
   groupA:
   - {fileID: 21300000, guid: 49021eee0b7fb214fb8e901ddd28294c, type: 3}
   - {fileID: 21300000, guid: 8248f6badff0dc0438b4a9c7c1893592, type: 3}
@@ -3046,8 +3048,11 @@ MonoBehaviour:
   firePoint: {fileID: 1503794746}
   fireRate: 5
   maxHealth: 100
-  shootSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
   healthBar: {fileID: 1513736324}
+  shootSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  baseShakeMagnitude: 0.1
+  shakeDuration: 0.2
+  shakeTarget: {fileID: 0}
   bulletPatterns:
   - patternType: 1
     delayBeforeStart: 1.66
