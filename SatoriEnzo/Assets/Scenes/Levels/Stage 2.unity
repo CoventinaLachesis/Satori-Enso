@@ -1790,15 +1790,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac924035d2a963947b7f5127e94d1c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 15
+  duration: 21
   loopPlatforms:
   - platformPrefab: {fileID: 5289605104003408391, guid: f93b49752676f5e47a8b66c2af12f9a4, type: 3}
     spawnPosition: {x: 13, y: -1.5}
     loopPositions:
     - {x: -8, y: -1.5}
     - {x: 8, y: -1.5}
-    enterSpeed: 2
-    loopSpeed: 2
+    enterSpeed: 3
+    loopSpeed: 3
 --- !u!4 &718042705
 Transform:
   m_ObjectHideFlags: 0
@@ -2329,15 +2329,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac924035d2a963947b7f5127e94d1c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 15
+  duration: 21
   loopPlatforms:
   - platformPrefab: {fileID: 5289605104003408391, guid: f93b49752676f5e47a8b66c2af12f9a4, type: 3}
     spawnPosition: {x: -13, y: -1.5}
     loopPositions:
     - {x: 8, y: -1.5}
     - {x: -8, y: -1.5}
-    enterSpeed: 2
-    loopSpeed: 2
+    enterSpeed: 3
+    loopSpeed: 3
 --- !u!4 &1223050498
 Transform:
   m_ObjectHideFlags: 0

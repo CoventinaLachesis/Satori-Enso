@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private BoxCollider2D playerCollider;
     private Animator anim;
     private GameObject currentPlatform;
+    private Vector3 lastPlatformPosition;
     public float horizontalSpeed;
     public float jumpSpeed;
     private int maxJump = 2; // Default Double Jump
@@ -79,6 +80,14 @@ public class Player : MonoBehaviour
             anim.SetBool("OnGround", false);
         }
 
+        if(currentPlatform != null)
+        {
+            Vector3 deltaPosition = currentPlatform.transform.position - lastPlatformPosition;
+            transform.position += deltaPosition;
+
+            lastPlatformPosition = currentPlatform.transform.position;
+        }
+
         anim.SetBool("IsRunning", horizontalInput != 0);
     }
 
@@ -99,10 +108,12 @@ public class Player : MonoBehaviour
                     DissolvePlatform(collision.gameObject, platformDisableDuration);
                     return;
                 }
+                
 
                 ResetJump(); 
             } 
             currentPlatform = collision.gameObject;
+            lastPlatformPosition = currentPlatform.transform.position;
             anim.SetBool("OnGround", true);
         }
 
