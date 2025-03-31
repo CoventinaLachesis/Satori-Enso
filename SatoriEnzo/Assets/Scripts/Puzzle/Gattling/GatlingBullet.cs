@@ -9,7 +9,7 @@ public class GatlingBullet : MonoBehaviour
     [Header("VFX & Sound")]
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private ParticleSystem explosionVFX;
-
+    public float damage = 2;
     private Rigidbody2D body;
     private bool hasHit = false;
 
@@ -34,7 +34,7 @@ public class GatlingBullet : MonoBehaviour
             BossPattern bossScript = other.GetComponent<BossPattern>();
             if (bossScript != null)
             {
-                bossScript.TakeDamage(2);
+                bossScript.TakeDamage(damage);
             }
 
             Destroy(gameObject);

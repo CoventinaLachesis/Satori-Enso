@@ -8,13 +8,14 @@ public class GatlingGun : MonoBehaviour
     public Transform player;
     public GameObject bulletPrefab;
     public float shootInterval = 0.2f;
-    public int currentAmmo = 0;
+    public float damagePerBullet = 2;
+    private int currentAmmo = 0;
 
     private float shootTimer = 0f;
     private float spawnBulletTimer = 0f;
     private bool isFiring = false;
     public GameObject gatlingAuraPrefab; // assign in Inspector
-    public GameObject auraInstance;
+    private GameObject auraInstance;
     private GatlingGunPartSpawner spawner;
     private GatlingGunPuzzleManager manager;
 
@@ -78,6 +79,10 @@ public class GatlingGun : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * 10f;
+        var bulletScript = bullet.GetComponent<GatlingBullet>();
+        if (bulletScript != null)
+            bulletScript.damage = damagePerBullet;
+
         currentAmmo--;
     }
 
