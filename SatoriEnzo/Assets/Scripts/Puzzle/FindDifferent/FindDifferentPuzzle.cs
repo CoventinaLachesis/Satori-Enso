@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class FindDifferentPuzzle : Puzzle
 {
+    public float damage = 20;
     [Header("Sprite Groups")]
     public Sprite[] groupA;
     public Sprite[] groupB;

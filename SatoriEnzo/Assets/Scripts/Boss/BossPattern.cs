@@ -7,12 +7,18 @@ public abstract class BossPattern : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 0.2f;
-    
-    protected AudioSource audioSource;
-    private int currentHealth;
-    [SerializeField] public int maxHealth = 100;
-    [SerializeField] private AudioClip shootSound;
+    [SerializeField] public float maxHealth = 100f;
     [SerializeField] protected Image healthBar;
+    [SerializeField] private AudioClip shootSound;
+
+    [SerializeField] private float baseShakeMagnitude = 0.1f;
+    [SerializeField] private float shakeDuration = 0.2f;
+    [SerializeField] private Transform shakeTarget;
+    private Coroutine shakeCoroutine;
+    private Vector3 originalPos;
+
+    protected AudioSource audioSource;
+    private float currentHealth;
     protected HealthBar healthBarScript;
 
     protected bool isShooting = false; // Prevents shooting until triggered
@@ -48,6 +54,7 @@ public abstract class BossPattern : MonoBehaviour
             healthBarScript.SetMaxValue(maxHealth);
             healthBarScript.SetCurrentValue(currentHealth);
         }
+        if (shakeTarget == null) shakeTarget = transform;
     }
     protected virtual void Start() 
     {
@@ -118,13 +125,39 @@ public abstract class BossPattern : MonoBehaviour
         audioSource.PlayOneShot(clip);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         Debug.LogError("Hit " + gameObject.name);
         currentHealth -= damage;
         Debug.Log("Hp:" + currentHealth);
         healthBarScript.SetCurrentValue(currentHealth);
+        if (shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
+
+        shakeCoroutine = StartCoroutine(ShakeDamageEffect(damage));
 
     }
+    private IEnumerator ShakeDamageEffect(float damage)
+    {
+        float elapsed = 0f;
+        float magnitude = baseShakeMagnitude * damage;
+
+        Vector3 shakeOrigin = shakeTarget.localPosition;
+
+        while (elapsed < shakeDuration)
+        {
+            Debug.Log("Shake");
+            float offsetX = Random.Range(-1f, 1f) * magnitude;
+            float offsetY = Random.Range(-1f, 1f) * magnitude;
+
+            shakeTarget.localPosition = shakeOrigin + new Vector3(offsetX, offsetY, 0);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        shakeTarget.localPosition = shakeOrigin;
+    }
+
 }
 

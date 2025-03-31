@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GatlingGunPuzzleManager : Puzzle
 {
-    public GameObject gatlingGunPrefab;
     public int requiredParts = 3;
     private int collectedParts = 0;
     private GatlingGun gatling;
