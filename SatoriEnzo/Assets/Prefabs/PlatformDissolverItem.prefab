@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusJumpSpeed: 0
   bonusHorizontalSpeed: 0
-  bonusJump: 1
+  bonusJump: 0
   bonusShield: 0
   reverseMovement: 0
   spawnPlatform: 0
