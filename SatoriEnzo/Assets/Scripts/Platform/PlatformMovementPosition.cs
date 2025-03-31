@@ -63,13 +63,6 @@ public class PlatformMovementPosition : PlatformPattern
     }
 }
 
-public enum PlatformMovementState
-{
-    Start,
-    End,
-    None // When Platforms are not initiated
-}
-
 [System.Serializable]
 public struct MovingPlatform
 {
