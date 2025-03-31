@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-playerScale.x, playerScale.y, playerScale.z);
 
-        if (Input.GetKeyDown(KeyCode.Space) && CheckJump())
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && CheckJump())
         {
             currentJump--;
             body.velocity = new Vector2(body.velocity.x, jumpSpeed + bonusJumpSpeed);
@@ -95,13 +95,14 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) ResetJump(); // Check Above
+            if (IsFromBelow(collision))
+                ResetJump();
             anim.SetBool("OnGround", true);
         }
 
         if(collision.gameObject.CompareTag("Platform"))
         {
-            if (collision.gameObject.transform.position.y < gameObject.transform.position.y - gameObject.transform.lossyScale.y) // Check Above
+            if (IsFromBelow(collision))
             {
                 if(platformDissolveEffectCounter > 0)
                 {
@@ -168,6 +169,15 @@ public class Player : MonoBehaviour
         {
             currentPlatform = null;
         }
+    }
+    private bool IsFromBelow(Collision2D collision)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.5f)
+                return true; // We're landing from above
+        }
+        return false;
     }
 
     private void ResetJump()
@@ -310,6 +320,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
     }
+
 
     
 }
