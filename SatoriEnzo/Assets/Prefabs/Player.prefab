@@ -189,6 +189,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalSpeed: 10
   jumpSpeed: 5
+  gravityDiveSpeed: 7
+  canDiveInterval: 0.3
   shieldObject: {fileID: 8699793004886838256}
   platformDissolverObject: {fileID: 911386860459506714}
   tempPlatform: {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
