@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class FindDifferentPuzzle : Puzzle
 {
     public float damage = 20;
-    [Header("Sprite Groups")]
-    public Sprite[] groupA;
-    public Sprite[] groupB;
+    // [Header("Sprite Groups")]
+    // public Sprite[] groupA;
+    // public Sprite[] groupB;
 
     [Header("Items")]
     public FindDifferenceItem[] items;
@@ -132,7 +132,7 @@ public class FindDifferentPuzzle : Puzzle
     {
         FXPlayer.PlayVFX(correctVFX, pos);
         FXPlayer.PlaySound(correctSound, pos);
-        boss.TakeDamage(10);
+        boss.TakeDamage(damage);
         EndPuzzle();
     }
 
