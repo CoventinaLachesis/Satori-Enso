@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; // Required for scene management
@@ -35,7 +35,19 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;   // Drag jump sound here
     [SerializeField] private AudioClip hitSound;    // Drag hit sound here
     [SerializeField] private AudioClip getItemSound;    // Drag hit sound here
-    
+
+
+    [Header("Air Dash")]
+    [SerializeField] private float dashSpeed = 15f;
+    [SerializeField] private float dashDuration = 0.2f;
+    private bool canDash = true;
+    private bool isDashing = false;
+    [Header("Double Tap Dash")]
+    [SerializeField] private float doubleTapThreshold = 0.25f;
+    private float lastLeftTapTime = -1f;
+    private float lastRightTapTime = -1f;
+    [Header("Dash VFX")]
+    public GameObject dashTrailPrefab;
 
     private AudioSource audioSource;
 
@@ -80,7 +92,29 @@ public class Player : MonoBehaviour
             anim.SetBool("OnGround", false);
         }
 
-        if(currentPlatform != null)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && canDash && !IsGrounded())
+        {
+            StartCoroutine(DoAirDash());
+        }
+        // Double-tap dash
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (Time.time - lastLeftTapTime <= doubleTapThreshold && canDash && !isDashing && !IsGrounded())
+            {
+                StartCoroutine(DoAirDash(-1));
+            }
+            lastLeftTapTime = Time.time;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (Time.time - lastRightTapTime <= doubleTapThreshold && canDash && !isDashing && !IsGrounded())
+            {
+                StartCoroutine(DoAirDash(1));
+            }
+            lastRightTapTime = Time.time;
+        }
+        if (currentPlatform != null)
         {
             Vector3 deltaPosition = currentPlatform.transform.position - lastPlatformPosition;
             transform.position += deltaPosition;
@@ -179,10 +213,17 @@ public class Player : MonoBehaviour
         }
         return false;
     }
+    
+    private bool IsGrounded()
+    {
+        return anim.GetBool("OnGround");
+    }
 
     private void ResetJump()
     {
         currentJump = maxJump + bonusJump;
+        canDash = true; //  reset dash on landing
+
     }
 
     private bool CheckJump()
@@ -190,6 +231,31 @@ public class Player : MonoBehaviour
         return currentJump > 0;
     }
 
+    private IEnumerator DoAirDash(int dir = 0)
+    {
+        isDashing = true;
+        canDash = false;
+
+        float originalGravity = body.gravityScale;
+        body.gravityScale = 0f;
+
+        float elapsed = 0f;
+        float dashDir = dir != 0 ? dir : Mathf.Sign(transform.localScale.x);
+
+        // Optional: trail effect
+        if (dashTrailPrefab)
+            Instantiate(dashTrailPrefab, transform.position, Quaternion.identity);
+
+        while (elapsed < dashDuration)
+        {
+            body.velocity = new Vector2(dashDir * dashSpeed, 0f);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        body.gravityScale = originalGravity;
+        isDashing = false;
+    }
     public void Death()
     {
         GoToEnding();
