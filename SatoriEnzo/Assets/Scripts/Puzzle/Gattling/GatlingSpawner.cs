@@ -98,18 +98,27 @@ public class GatlingGunPartSpawner : MonoBehaviour
         spawnedBullet.Add(bullet);
 
     }
-
-    private void DespawnAll() {
-        foreach (GameObject part in spawnedParts)
-        {
-            if (part != null) Destroy(part);
-        }
+    public void DespawnBullet () {
         foreach (GameObject bullet in spawnedBullet)
         {
             if (bullet != null) Destroy(bullet);
         }
-        spawnedParts.Clear();
         spawnedBullet.Clear();
+
+    }
+    public void DespawnPart() {
+
+        foreach (GameObject part in spawnedParts)
+        {
+            if (part != null) Destroy(part);
+        }
+        spawnedParts.Clear();
+
+    }
+
+    private void DespawnAll() {
+        DespawnPart();
+        DespawnBullet();
 
     }
 }

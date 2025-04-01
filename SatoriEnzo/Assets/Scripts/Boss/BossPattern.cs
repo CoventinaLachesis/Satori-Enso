@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Required for scene management
+
 
 public abstract class BossPattern : MonoBehaviour
 {
+    public string nextStage = "Menu";
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 0.2f;
@@ -133,10 +136,18 @@ public abstract class BossPattern : MonoBehaviour
         healthBarScript.SetCurrentValue(currentHealth);
         if (shakeCoroutine != null)
             StopCoroutine(shakeCoroutine);
-
         shakeCoroutine = StartCoroutine(ShakeDamageEffect(damage));
 
+        if (currentHealth <= 0) {
+            Invoke(nameof(Death), 0.5f); // Delay scene transition
+        }
+
     }
+
+    private void Death() {
+        SceneManager.LoadScene(nextStage);
+    }
+
     private IEnumerator ShakeDamageEffect(float damage)
     {
         float elapsed = 0f;

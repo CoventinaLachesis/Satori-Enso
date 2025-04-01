@@ -4,8 +4,14 @@ using UnityEngine;
 
 public abstract class Puzzle : MonoBehaviour
 {
-    public Player player;
-    public BossPattern boss;
+    protected Player player;
+    protected BossPattern boss;
+
+    protected virtual void Start()
+    {
+        if (player == null) player = FindObjectOfType<Player>();
+        if (boss == null) boss = FindObjectOfType<BossPattern>();
+    }
 
     public abstract void InitPuzzle();
     public abstract void EndPuzzle();

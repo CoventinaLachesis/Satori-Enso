@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GatlingGun : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     public GameObject bulletPrefab;
     public float shootInterval = 0.2f;
     public float damagePerBullet = 2;
@@ -22,7 +22,9 @@ public class GatlingGun : MonoBehaviour
     private void Awake() {
         spawner = FindObjectOfType<GatlingGunPartSpawner>();
         manager = FindObjectOfType<GatlingGunPuzzleManager>();
-    
+        player = FindObjectOfType<Player>().transform;
+
+
     }
     void ActivateGatlingGun()
     {
@@ -72,7 +74,7 @@ public class GatlingGun : MonoBehaviour
                 auraInstance = null;
             }
             isFiring = false;
-            //spawner.SpawnParts();
+            spawner.DespawnBullet();
         }
     }
     void Shoot()
