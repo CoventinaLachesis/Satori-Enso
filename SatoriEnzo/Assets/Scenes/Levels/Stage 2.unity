@@ -1599,6 +1599,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: dashSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: dashDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: dashTrailPrefab
+      value: 
+      objectReference: {fileID: 8491012756413636999, guid: 0dc1203f464c7d24ab2a8dff256f07b1, type: 3}
+    - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: horizontalSpeed
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

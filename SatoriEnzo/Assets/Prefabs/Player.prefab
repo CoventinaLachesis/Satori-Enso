@@ -200,6 +200,10 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   hitSound: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
   getItemSound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  dashSpeed: 15
+  dashDuration: 0.2
+  doubleTapThreshold: 0.25
+  dashTrailPrefab: {fileID: 8491012756413636999, guid: 0dc1203f464c7d24ab2a8dff256f07b1, type: 3}
 --- !u!50 &8664097046141591793
 Rigidbody2D:
   serializedVersion: 4
