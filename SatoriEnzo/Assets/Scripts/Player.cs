@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private Vector3 lastPlatformPosition;
     public float horizontalSpeed;
     public float jumpSpeed;
+    public float gravityDiveSpeed;
+    public float canDiveInterval;
+    private bool canDive = true;
     private int maxJump = 2; // Default Double Jump
     private int currentJump;
     private int bonusJump = 0;
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour
     private int platformDissolveEffectCounter = 0;
     private int movementReverseCounter = 0;
     private float platformDisableDuration = 7;
+    private bool isDiving = false;
 
     private float bonusShieldCount = 0; 
     private Vector3 initScale;
@@ -91,6 +95,23 @@ public class Player : MonoBehaviour
             StartCoroutine(DisablePlatformCollision());
             anim.SetBool("OnGround", false);
         }
+        
+        if(
+            ( Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) ) &&
+            ( !IsGrounded() && !isDashing && !isDiving && canDive )
+        )
+        {
+            isDiving = true;
+            canDive = false;
+            StartCoroutine(SetCanDive());
+        }
+
+        Debug.Log(canDive);
+
+        if(isDiving)
+        {
+            body.velocity = new Vector2(body.velocity.x, -gravityDiveSpeed);
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && canDash && !IsGrounded())
         {
@@ -130,8 +151,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             if (IsFromBelow(collision))
+            {
                 ResetJump();
-            anim.SetBool("OnGround", true);
+                anim.SetBool("OnGround", true);
+            }
+                
         }
 
         if(collision.gameObject.CompareTag("Platform"))
@@ -224,7 +248,10 @@ public class Player : MonoBehaviour
     {
         currentJump = maxJump + bonusJump;
         canDash = true; //  reset dash on landing
-
+        if(isDiving)
+        {
+            isDiving = false;
+        }
     }
 
     private bool CheckJump()
@@ -256,6 +283,13 @@ public class Player : MonoBehaviour
 
         body.gravityScale = originalGravity;
         isDashing = false;
+    }
+
+    IEnumerator SetCanDive()
+    {
+        yield return new WaitForSeconds(canDiveInterval);
+
+        canDive = true;
     }
     public void Death()
     {

@@ -3606,6 +3606,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: canDiveInterval
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: gravityDiveBonus
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
