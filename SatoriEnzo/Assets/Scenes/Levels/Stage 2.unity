@@ -2759,7 +2759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb330d0bf1617743b7612c7737f2161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStage: Menu
+  nextStage: Victory
   bulletPrefab: {fileID: 8699459242365256332, guid: 333cdfb200571314eb62ad3cd3ab437a, type: 3}
   firePoint: {fileID: 1503794746}
   fireRate: 5
