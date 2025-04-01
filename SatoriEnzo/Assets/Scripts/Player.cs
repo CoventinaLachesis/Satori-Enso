@@ -143,13 +143,14 @@ public class Player : MonoBehaviour
                     DissolvePlatform(collision.gameObject, platformDisableDuration);
                     return;
                 }
-                
 
+                currentPlatform = collision.gameObject;
+                lastPlatformPosition = currentPlatform.transform.position;
+                anim.SetBool("OnGround", true);
+                
                 ResetJump(); 
             } 
-            currentPlatform = collision.gameObject;
-            lastPlatformPosition = currentPlatform.transform.position;
-            anim.SetBool("OnGround", true);
+            
         }
 
         if (collision.gameObject.CompareTag("Bullet"))
