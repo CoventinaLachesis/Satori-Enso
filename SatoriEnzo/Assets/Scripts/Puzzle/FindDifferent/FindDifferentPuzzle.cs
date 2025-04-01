@@ -9,6 +9,9 @@ public class FindDifferentPuzzle : Puzzle
     public Sprite[] groupA;
     public Sprite[] groupB;
 
+    [Header("Items")]
+    public FindDifferenceItem[] items;
+
     [Header("Spawn Points")]
     public Transform[] spawnPoints;
 
@@ -44,16 +47,24 @@ public class FindDifferentPuzzle : Puzzle
 
         Shuffle(spawnPoints);
 
-        // Pick 3 random from group A
-        List<Sprite> selectedA = new();
-        for (int i = 0; i < 3; i++)
-        {
-            selectedA.Add(groupA[Random.Range(0, groupA.Length)]);
-        }
-
-        // Pick 1 random from group B
-        Sprite different = groupB[Random.Range(0, groupB.Length)];
+        // Pick 1 random that is different
+        FindDifferenceItem differentItem = items[Random.Range(0, items.Length)];
+        Sprite different = differentItem.sprite;
         int differentIndex = Random.Range(0, 4);
+
+        // Pick 3 with atleast 1 same attribute
+        List<FindDifferenceItem> filtered = FilterExclude(differentItem);
+        List<FindDifferenceItem> selectedAStruct = new();
+        List<Sprite> selectedA = new();
+
+        selectedAStruct.Add(filtered[Random.Range(0, filtered.Count)]);
+        selectedA.Add(selectedAStruct[0].sprite);
+        for (int i = 1; i < 3; i++)
+        {
+            FindDifferenceItem selected = SelectWithSameAttribute(filtered, selectedAStruct[i-1]);
+            selectedAStruct.Add(selected);
+            selectedA.Add(selected.sprite);
+        }
 
         for (int i = 0; i < 4; i++)
         {
@@ -181,4 +192,74 @@ public class FindDifferentPuzzle : Puzzle
         yield return new WaitForSeconds(0.5f);
         player.Death();
     }
+
+    private List<FindDifferenceItem> FilterExclude(FindDifferenceItem diffItem)
+    {
+        List<FindDifferenceItem> filtered = new List<FindDifferenceItem>();
+
+        foreach(FindDifferenceItem i in items)
+        {
+            if(i.amount != diffItem.amount && i.itemColor != diffItem.itemColor && i.shape != diffItem.shape)
+                filtered.Add(i);
+        }
+
+        return filtered;
+    }
+
+    private FindDifferenceItem SelectWithSameAttribute(List<FindDifferenceItem> itemList ,FindDifferenceItem inputItem)
+    {
+        List<FindDifferenceItem> matchingItems = new List<FindDifferenceItem>();
+
+        foreach (var item in itemList)
+        {
+            if (
+                item.shape == inputItem.shape || 
+                item.amount == inputItem.amount || 
+                item.itemColor == inputItem.itemColor)
+            {
+                matchingItems.Add(item);
+            }
+        }
+
+        // If no matching items, return a default item
+        if (matchingItems.Count == 0)
+        {
+            Debug.LogWarning("No matching item found! Returning a random item.");
+            return itemList[Random.Range(0, itemList.Count)];
+        }
+
+        // Return a random matching item
+        return matchingItems[Random.Range(0, matchingItems.Count)];
+    }
+}
+
+[System.Serializable]
+public struct FindDifferenceItem
+{
+    public Sprite sprite;
+    public Shape shape;
+    public Amount amount;
+    public ItemColor itemColor;
+}
+
+public enum Shape
+{
+    Heart,
+    Star,
+    Swiftlet,
+    Hat
+}
+
+public enum Amount 
+{
+    One,
+    Two,
+    Three
+}
+
+public enum ItemColor
+{
+    Red,
+    Green,
+    Blue
 }
