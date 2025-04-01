@@ -331,8 +331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzles:
-  - {fileID: 324732229}
   - {fileID: 272331618}
+  - {fileID: 324732229}
   - {fileID: 1110463846}
   spawnInterval: 5
   puzzleDuration: 15
@@ -384,8 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76806d38a55321644b298ad9ff6784a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  boss: {fileID: 1503794742}
   requiredParts: 3
 --- !u!4 &272331620
 Transform:
@@ -415,7 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e8c129bb8a1f94aac36a0fa25cc1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   bulletPrefab: {fileID: 5076178948458269621, guid: 1496cbb13846d3d4f88b8a8a9fe5b67a, type: 3}
   shootInterval: 0.2
   damagePerBullet: 2
@@ -449,8 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32172b9e0a6c3f54fa504b7ddf51d69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  boss: {fileID: 1503794747}
   cannonPrefab: {fileID: 1697921259061201299, guid: 96bd561e9ec6a424983ddafc7d40dc45, type: 3}
   cannonBallItemPrefab: {fileID: 3380222835093163166, guid: 9934aa3655f47674aa64d4b41edcad48, type: 3}
   cannonBallProjectilePrefab: {fileID: 4763697788639711798, guid: 788fa666630672e41ab640e5769aa3d7, type: 3}
@@ -1546,7 +1541,7 @@ Transform:
   m_GameObject: {fileID: 803783965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.15, y: -2.43, z: 0}
+  m_LocalPosition: {x: -9, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1713,16 +1708,152 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4baff2e4ec5e6b04fa34a022b65a2642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  boss: {fileID: 1503794747}
   damage: 20
-  groupA:
-  - {fileID: 21300000, guid: 49021eee0b7fb214fb8e901ddd28294c, type: 3}
-  - {fileID: 21300000, guid: 8248f6badff0dc0438b4a9c7c1893592, type: 3}
-  - {fileID: 21300000, guid: 3dd4931f28dd3454d88e73bcab086843, type: 3}
-  - {fileID: 21300000, guid: 3fd6385aec880014f881549588c93035, type: 3}
-  groupB:
-  - {fileID: 21300000, guid: 07caf3d1930bab14aa8f6dcdf2db871a, type: 3}
+  items:
+  - sprite: {fileID: 21300000, guid: c68498196c3a04e46b510726dd1f8dbe, type: 3}
+    shape: 3
+    amount: 0
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: efca71320b554ae4e8042cdfbc92aa8a, type: 3}
+    shape: 3
+    amount: 1
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: e20eb0c3c3e94b44e9c5ca0f651fb326, type: 3}
+    shape: 3
+    amount: 2
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 1694f65fd96b1a9479f5d693540dc8de, type: 3}
+    shape: 3
+    amount: 0
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 316ca0bca2a58e44fa6be7ed6e0adc05, type: 3}
+    shape: 3
+    amount: 1
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 8a9c7c13a459c8249a91e8ee7032298f, type: 3}
+    shape: 3
+    amount: 2
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 13d512fb824155748860db61dc5a7b56, type: 3}
+    shape: 3
+    amount: 0
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: 26845ce493ebe9749b3b7ba078d066f1, type: 3}
+    shape: 3
+    amount: 1
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: f4e29a38e557ba9489d5e47c29b57a5d, type: 3}
+    shape: 3
+    amount: 2
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: 4058919fa8da19c48bbf8df508dd2885, type: 3}
+    shape: 0
+    amount: 0
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 5e5d0c31068d90c4c8823b462b167881, type: 3}
+    shape: 0
+    amount: 1
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: e6d7e8e7de8395f4daa4087740ca3507, type: 3}
+    shape: 0
+    amount: 2
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 3228af844efa40347aaf073c06c6961d, type: 3}
+    shape: 0
+    amount: 0
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 071f57f4d2028e343ab91df24c8a0017, type: 3}
+    shape: 0
+    amount: 1
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 568918fca270d0f419c7057f593c5474, type: 3}
+    shape: 0
+    amount: 2
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 29e42a217f22f11478c566da72a09d1e, type: 3}
+    shape: 0
+    amount: 0
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: fe8fb6f58bb641145840079c307ecf52, type: 3}
+    shape: 0
+    amount: 1
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: 67d09b5c96094eb45a4025a0aa53cbcc, type: 3}
+    shape: 0
+    amount: 2
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: 40af7de5785a8ab4c8fdc7db170da057, type: 3}
+    shape: 1
+    amount: 0
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 68171f703501d10498e4d274730c65eb, type: 3}
+    shape: 1
+    amount: 1
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: cbb6791f694bad94597774933012ecd1, type: 3}
+    shape: 1
+    amount: 2
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 58f751323e6d6f94b9e93d329d327b9c, type: 3}
+    shape: 1
+    amount: 0
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 7c714e3b36fa55c499147251de8e0665, type: 3}
+    shape: 1
+    amount: 1
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 0bdf8395956e14f46bf585304e35d1c0, type: 3}
+    shape: 1
+    amount: 2
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: f5c01254e63dfba448298252e8efde6f, type: 3}
+    shape: 1
+    amount: 0
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: 49861ba47e9e85b479793a42cd154476, type: 3}
+    shape: 1
+    amount: 1
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: ec0139177cda9324f8dce9725ae28594, type: 3}
+    shape: 1
+    amount: 2
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: e361b943a0e9f3044984eef52420c776, type: 3}
+    shape: 2
+    amount: 0
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 8fa92f4b928a05b439011a583c911b1c, type: 3}
+    shape: 2
+    amount: 1
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 1c1d5c5537aead2498afb9787307304a, type: 3}
+    shape: 2
+    amount: 2
+    itemColor: 2
+  - sprite: {fileID: 21300000, guid: 8337d4a6587861047a009c2b01c262d1, type: 3}
+    shape: 2
+    amount: 0
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 334ebc82b40b4cf428168f68fbbbdcd5, type: 3}
+    shape: 2
+    amount: 1
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 96b53289b4887974db1f4339739cf20b, type: 3}
+    shape: 2
+    amount: 2
+    itemColor: 1
+  - sprite: {fileID: 21300000, guid: 2eb40d018d9718c4293add0b8bb1891b, type: 3}
+    shape: 2
+    amount: 0
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: 25c86f672f1bbd043b8b02da38258f9f, type: 3}
+    shape: 2
+    amount: 1
+    itemColor: 0
+  - sprite: {fileID: 21300000, guid: 59dd530e31de6c8408e75b7dd6aab419, type: 3}
+    shape: 2
+    amount: 2
+    itemColor: 0
   spawnPoints:
   - {fileID: 1610047030}
   - {fileID: 1865629412}
@@ -2628,6 +2759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb330d0bf1617743b7612c7737f2161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextStage: Menu
   bulletPrefab: {fileID: 8699459242365256332, guid: 333cdfb200571314eb62ad3cd3ab437a, type: 3}
   firePoint: {fileID: 1503794746}
   fireRate: 5
@@ -2963,7 +3095,7 @@ Transform:
   m_GameObject: {fileID: 1610047029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.64, y: -1.15, z: 0}
+  m_LocalPosition: {x: 4, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3176,7 +3308,7 @@ Transform:
   m_GameObject: {fileID: 1865629411}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.29, y: -2.48, z: 0}
+  m_LocalPosition: {x: -4, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3481,7 +3613,7 @@ Transform:
   m_GameObject: {fileID: 1990724889}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8, y: -2.53, z: 0}
+  m_LocalPosition: {x: 9, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
