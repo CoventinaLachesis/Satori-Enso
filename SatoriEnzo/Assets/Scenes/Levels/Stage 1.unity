@@ -3191,7 +3191,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 26.58
+  m_Radius: 10.54
 --- !u!82 &1503794749
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4123,9 +4123,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 911386860459506714, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1106925737923846799, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106925737923846799, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1254458963238772187, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4168,12 +4176,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: immortal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
       propertyPath: canDiveInterval
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
       propertyPath: gravityDiveBonus
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699793004886838256, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4618,7 +4634,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 350169e938da09346903e505e4a33873, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.63
   Loop: 1
   Mute: 0
   Spatialize: 0

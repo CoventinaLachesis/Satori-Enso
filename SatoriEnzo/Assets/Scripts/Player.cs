@@ -10,10 +10,13 @@ public class Player : MonoBehaviour
     private Animator anim;
     private GameObject currentPlatform;
     private Vector3 lastPlatformPosition;
+
     public float horizontalSpeed;
     public float jumpSpeed;
     public float gravityDiveSpeed;
     public float canDiveInterval;
+
+
     private bool canDive = true;
     private int maxJump = 2; // Default Double Jump
     private int currentJump;
@@ -25,6 +28,7 @@ public class Player : MonoBehaviour
     private int movementReverseCounter = 0;
     private float platformDisableDuration = 7;
     private bool isDiving = false;
+    public GameObject diveTrailPrefab;
 
     private float bonusShieldCount = 0; 
     private Vector3 initScale;
@@ -254,6 +258,9 @@ public class Player : MonoBehaviour
         if(isDiving)
         {
             isDiving = false;
+            if (diveTrailPrefab)
+                Instantiate(diveTrailPrefab, transform.position, Quaternion.identity);
+
         }
     }
 
