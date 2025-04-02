@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3397021403435875272}
   - component: {fileID: 9051078867689001603}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform Dissolver Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4434616827258183002}
   - component: {fileID: 3417672609611890261}
   - component: {fileID: 1511982302363891564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3645720939951966729}
   - component: {fileID: 3380780912874735285}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
