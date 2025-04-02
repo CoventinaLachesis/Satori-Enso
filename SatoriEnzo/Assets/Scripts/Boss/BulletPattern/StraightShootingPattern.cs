@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// RadialBurstPattern.cs
-[CreateAssetMenu(menuName = "Bullet Patterns/Radial Burst")]
-public class RadialBurstPattern : BulletPatternSO
+
+[CreateAssetMenu(menuName = "Bullet Patterns/Straight Shoot")]
+
+public class StraightShootingPattern : BulletPatternSO
 {
+
+    public float bulletFrequency = 1f;
+    public ShootDirection shootDirection = ShootDirection.Down;
+
     public override IEnumerator Execute(Transform firePoint, BossPattern boss)
     {
+        float baseAngle = GetAngleFromDirection(shootDirection);
         for (int i = 0; i < bulletCount; i++)
-        {
-            float angle = i * (360f / bulletCount);
-            ShootBullet(firePoint, angle);
-        }
-        yield return null;
+
+            {
+                ShootBullet(firePoint, baseAngle);
+            }
+            yield return new WaitForSeconds(1/bulletFrequency);
+        
     }
+
 
 #if UNITY_EDITOR
     public override void DrawGizmos(Transform firePoint)
@@ -22,7 +30,7 @@ public class RadialBurstPattern : BulletPatternSO
         Gizmos.color = Color.red;
         for (int i = 0; i < bulletCount; i++)
         {
-            float angle = i * (360f / bulletCount);
+            float angle = GetAngleFromDirection(shootDirection);
             if (motionType == BulletMotionType.SineWave)
             {
                 DrawSineWavePath(firePoint.position, angle, waveAmplitude, waveFrequency, speed);
@@ -35,6 +43,4 @@ public class RadialBurstPattern : BulletPatternSO
         }
     }
 #endif
-
 }
-

@@ -49,7 +49,21 @@ public abstract class BulletPatternSO : ScriptableObject
             lastPoint = next;
         }
     }
-
+    protected float GetAngleFromDirection(ShootDirection direction)
+    {
+        return direction switch
+        {
+            ShootDirection.Up => 90f,
+            ShootDirection.Down => 270f,
+            ShootDirection.Left => 180f,
+            ShootDirection.Right => 0f,
+            ShootDirection.UpLeft => 135f,
+            ShootDirection.UpRight => 45f,
+            ShootDirection.DownLeft => 225f,
+            ShootDirection.DownRight => 315f,
+            _ => 0f
+        };
+    }
 #if UNITY_EDITOR
     public virtual void DrawGizmos(Transform firePoint)
     {
