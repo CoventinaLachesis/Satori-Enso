@@ -81,6 +81,7 @@ public class Player : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && CheckJump())
         {
+            isDiving = false;
             currentJump--;
             body.velocity = new Vector2(body.velocity.x, jumpSpeed + bonusJumpSpeed);
             PlaySound(jumpSound);
