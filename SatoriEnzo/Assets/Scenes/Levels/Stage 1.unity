@@ -344,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 182390515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.02, y: 1.19, z: 0}
+  m_LocalPosition: {x: 7.66, y: 3.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3157,6 +3157,7 @@ MonoBehaviour:
   patterns:
   - {fileID: 11400000, guid: 2dbde38ab409a564aada5c16967b4d69, type: 2}
   - {fileID: 11400000, guid: d58d2d8fca08ae749bcb3c0a97cc501b, type: 2}
+  - {fileID: 11400000, guid: c3ebfaac1638448439933581241cfda6, type: 2}
 --- !u!58 &1503794748
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3527,7 +3528,7 @@ Transform:
   m_GameObject: {fileID: 1604532840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.72, y: 1.34, z: 0}
+  m_LocalPosition: {x: -7.28, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
