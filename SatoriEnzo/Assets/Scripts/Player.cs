@@ -93,6 +93,8 @@ public class Player : MonoBehaviour
         )
         {
             StartCoroutine(DisablePlatformCollision());
+            canDive = false;
+            StartCoroutine(SetCanDive());
             anim.SetBool("OnGround", false);
         }
         
