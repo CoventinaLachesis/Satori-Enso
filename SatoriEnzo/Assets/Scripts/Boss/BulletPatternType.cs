@@ -40,8 +40,10 @@ public class BulletPatternConfig
     [Header("General Settings")]
     public BulletPatternType patternType;
     public float delayBeforeStart = 0f;
+    public GameObject bulletPrefab; // assign per pattern
 
     [Header("Common Parameters")]
+
     public int bulletCount = 12;
     public float speed = 5f;
 
