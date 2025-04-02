@@ -3156,6 +3156,7 @@ MonoBehaviour:
   shakeTarget: {fileID: 1136830530}
   patterns:
   - {fileID: 11400000, guid: 2dbde38ab409a564aada5c16967b4d69, type: 2}
+  - {fileID: 11400000, guid: d58d2d8fca08ae749bcb3c0a97cc501b, type: 2}
 --- !u!58 &1503794748
 CircleCollider2D:
   m_ObjectHideFlags: 0
