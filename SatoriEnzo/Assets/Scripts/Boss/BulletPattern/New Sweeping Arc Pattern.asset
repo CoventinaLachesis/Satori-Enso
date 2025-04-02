@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6219ec88491826b4589c4d47a0434a05, type: 3}
+  m_Name: New Sweeping Arc Pattern
+  m_EditorClassIdentifier: 
+  patternName: Pattern
+  bulletPrefab: {fileID: 8699459242365256332, guid: 333cdfb200571314eb62ad3cd3ab437a, type: 3}
+  speed: 5
+  bulletCount: 10
+  motionType: 0
+  waveFrequency: 4.5
+  waveAmplitude: 0.29
+  shootDirection: 1
+  sweepRange: 162.3
+  interval: 0.3
