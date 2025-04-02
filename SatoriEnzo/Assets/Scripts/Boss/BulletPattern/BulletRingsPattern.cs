@@ -25,7 +25,7 @@ public class BulletRingsPattern : BulletPatternSO
         yield return null;
     }
 #if UNITY_EDITOR
-    public virtual void DrawGizmos(Transform firePoint)
+    public override void DrawGizmos(Transform firePoint)
     {
         Gizmos.color = Color.red;
         for (int i = 0; i < bulletCount; i++)

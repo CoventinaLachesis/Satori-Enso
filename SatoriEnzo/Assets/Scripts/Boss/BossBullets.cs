@@ -16,7 +16,7 @@ public class BossBullet : MonoBehaviour
     private Vector2 basePosition;
     private Vector2 perpendicular;
     private float timeAlive = 0f;
-    private int bounceCount = 0;
+    //private int bounceCount = 0;
     private bool initialized = false;
     public float bounceMultiplier = 1.2f;
     public void SetDirection(Vector2 dir)
