@@ -106,8 +106,6 @@ public class Player : MonoBehaviour
             StartCoroutine(SetCanDive());
         }
 
-        Debug.Log(canDive);
-
         if(isDiving)
         {
             body.velocity = new Vector2(body.velocity.x, -gravityDiveSpeed);
