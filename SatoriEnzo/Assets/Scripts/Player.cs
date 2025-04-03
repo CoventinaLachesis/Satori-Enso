@@ -10,10 +10,13 @@ public class Player : MonoBehaviour
     private Animator anim;
     private GameObject currentPlatform;
     private Vector3 lastPlatformPosition;
+
     public float horizontalSpeed;
     public float jumpSpeed;
     public float gravityDiveSpeed;
     public float canDiveInterval;
+
+
     private bool canDive = true;
     private int maxJump = 2; // Default Double Jump
     private int currentJump;
@@ -25,6 +28,7 @@ public class Player : MonoBehaviour
     private int movementReverseCounter = 0;
     private float platformDisableDuration = 7;
     private bool isDiving = false;
+    public GameObject diveTrailPrefab;
 
     private float bonusShieldCount = 0; 
     private Vector3 initScale;
@@ -189,10 +193,10 @@ public class Player : MonoBehaviour
                 Destroy(collision.gameObject);
                 return;
             }
-                
+
 
             if (immortal == false)
-            Invoke(nameof(Death), 0.5f); // Delay scene transition
+                Death();
         }
 
         if (collision.gameObject.CompareTag("StageBullet"))
@@ -205,15 +209,15 @@ public class Player : MonoBehaviour
                 stageBulletScript.Deactivate();
                 return;
             }
-                
+
 
             if (immortal == false)
-            Invoke(nameof(Death), 0.5f); // Delay scene transition
+                Death();
         }
 
         if (collision.gameObject.CompareTag("KillZone"))
         {
-            Invoke(nameof(Death), 0.5f); // Delay scene transition
+            Death();
         }
 
         if (collision.gameObject.CompareTag("Item"))
@@ -254,6 +258,9 @@ public class Player : MonoBehaviour
         if(isDiving)
         {
             isDiving = false;
+            if (diveTrailPrefab)
+                Instantiate(diveTrailPrefab, transform.position, Quaternion.identity);
+
         }
     }
 
@@ -296,7 +303,13 @@ public class Player : MonoBehaviour
     }
     public void Death()
     {
-        GoToEnding();
+        // Freeze time
+        Time.timeScale = 0.05f;
+
+        // Zoom camera
+        Camera.main.GetComponent<CameraZoomOnDeath>().FocusOn(transform);
+        Invoke(nameof(GoToEnding), 0.2f); // Delay scene transition
+
     }
     private void GoToEnding()
     {
