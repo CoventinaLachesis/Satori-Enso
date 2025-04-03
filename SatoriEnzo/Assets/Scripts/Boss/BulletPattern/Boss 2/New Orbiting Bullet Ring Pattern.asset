@@ -19,7 +19,7 @@ MonoBehaviour:
   motionType: 0
   waveFrequency: 5
   waveAmplitude: 0.5
-  initialRadius: 2
+  initialRadius: 1
   expansionRate: 3
   sizeIncreaseRate: 0.15
   orbitSpeed: 10
