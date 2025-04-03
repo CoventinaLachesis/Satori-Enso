@@ -24,8 +24,8 @@ TagManager:
   - Ground
   - BossBullet_SineWave
   - Player
-  - 
-  - 
+  - BossBullet_Normal
+  - StageBullet
   - 
   - 
   - 
