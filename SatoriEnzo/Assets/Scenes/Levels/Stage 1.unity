@@ -3089,6 +3089,7 @@ Transform:
   m_Children:
   - {fileID: 2110316421}
   - {fileID: 59963175}
+  - {fileID: 1881465089}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1503794742
@@ -3139,7 +3140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb330d0bf1617743b7612c7737f2161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStage: Stage 2
+  nextStage: Stage 2 Cutscene
   bulletPrefab: {fileID: 8699459242365256332, guid: 333cdfb200571314eb62ad3cd3ab437a, type: 3}
   firePoint: {fileID: 1503794746}
   fireRate: 5
@@ -4777,6 +4778,7 @@ MonoBehaviour:
   audioSource: {fileID: 1353264632606343007}
   allowedScenes:
   - Stage 1
+  - Cutscene Stage 2
   - Stage 2
 --- !u!1 &8342783325873468482
 GameObject:
