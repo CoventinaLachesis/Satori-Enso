@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 356872306}
   - component: {fileID: 356872305}
   - component: {fileID: 356872303}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StageBulletWave2.3
   m_TagString: StageBullet
   m_Icon: {fileID: 0}
@@ -1215,7 +1215,7 @@ GameObject:
   - component: {fileID: 662036770}
   - component: {fileID: 662036769}
   - component: {fileID: 662036767}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StageBulletWave2.1
   m_TagString: StageBullet
   m_Icon: {fileID: 0}
@@ -2602,7 +2602,7 @@ GameObject:
   - component: {fileID: 1348597497}
   - component: {fileID: 1348597496}
   - component: {fileID: 1348597494}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StageBulletWave1.1
   m_TagString: StageBullet
   m_Icon: {fileID: 0}
@@ -2784,7 +2784,7 @@ GameObject:
   - component: {fileID: 1416033902}
   - component: {fileID: 1416033901}
   - component: {fileID: 1416033899}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StageBulletWave1.2
   m_TagString: StageBullet
   m_Icon: {fileID: 0}
@@ -3610,7 +3610,7 @@ GameObject:
   - component: {fileID: 1788751195}
   - component: {fileID: 1788751194}
   - component: {fileID: 1788751192}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StageBulletWave1.3
   m_TagString: StageBullet
   m_Icon: {fileID: 0}
@@ -3823,7 +3823,7 @@ GameObject:
   - component: {fileID: 1881465087}
   - component: {fileID: 1881465086}
   - component: {fileID: 1881465084}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StageBulletWave2.2
   m_TagString: StageBullet
   m_Icon: {fileID: 0}
