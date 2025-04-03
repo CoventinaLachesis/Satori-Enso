@@ -102,7 +102,16 @@ MonoBehaviour:
   bonusHorizontalSpeed: 0
   bonusJump: 0
   bonusShield: 1
-  duration: 10
+  reverseMovement: 0
+  spawnPlatform: 0
+  platformDuration: 0
+  spawnPlatformOffset: {x: 0, y: 0}
+  platformDissolveEffect: 0
+  platformDisableDuration: 7
+  bonusScale: 0
+  duration: 5
+  expireTime: 8
+  blinkInterval: 0.2
 --- !u!61 &5736550916988696280
 BoxCollider2D:
   m_ObjectHideFlags: 0

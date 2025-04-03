@@ -116,8 +116,6 @@ public class Player : MonoBehaviour
             StartCoroutine(SetCanDive());
         }
 
-        Debug.Log(canDive);
-
         if(isDiving)
         {
             body.velocity = new Vector2(body.velocity.x, -gravityDiveSpeed);
@@ -352,6 +350,11 @@ public class Player : MonoBehaviour
         // Zoom camera
         Camera.main.GetComponent<CameraZoomOnDeath>().FocusOn(transform);
         Invoke(nameof(GoToEnding), 0.2f); // Delay scene transition
+        Invoke(nameof(ReturnTime), 0.2f);
+
+    }
+    public void ReturnTime() {
+        Time.timeScale = 1f;
 
     }
     private void GoToEnding()

@@ -98,11 +98,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611ef724f85cda64095db36202bc99e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusJumpSpeed: -2
+  bonusJumpSpeed: -1
   bonusHorizontalSpeed: 0
   bonusJump: 0
   bonusShield: 0
+  reverseMovement: 0
+  spawnPlatform: 0
+  platformDuration: 0
+  spawnPlatformOffset: {x: 0, y: 0}
+  platformDissolveEffect: 0
+  platformDisableDuration: 7
+  bonusScale: 0
   duration: 10
+  expireTime: 8
+  blinkInterval: 0.2
 --- !u!61 &5736550916988696280
 BoxCollider2D:
   m_ObjectHideFlags: 0
