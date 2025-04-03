@@ -70,6 +70,9 @@ public class Player : MonoBehaviour
 
         initScale = transform.localScale;
         playerScale = initScale;
+
+        StartCoroutine(StartInvincibility());
+
         ResetJump();
     }
 
@@ -234,6 +237,45 @@ public class Player : MonoBehaviour
             currentPlatform = null;
         }
     }
+    IEnumerator StartInvincibility(float duration = 3f, float blinkInterval = 0.15f)
+    {
+        int playerLayer = LayerMask.NameToLayer("Player");
+
+        // Add all bullet-type layers here
+        int[] bulletLayers = new int[]
+        {
+        LayerMask.NameToLayer("BossBullet_SineWave"),
+        LayerMask.NameToLayer("BossBullet_Normal"),
+        LayerMask.NameToLayer("StageBullet")
+        };
+
+        // Disable collision with all bullet layers
+        foreach (int bulletLayer in bulletLayers)
+        {
+            Physics2D.IgnoreLayerCollision(playerLayer, bulletLayer, true);
+        }
+
+        // Blinking
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        float timer = 0f;
+        bool visible = true;
+
+        while (timer < duration)
+        {
+            visible = !visible;
+            sprite.enabled = visible;
+
+            timer += blinkInterval;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
+        // Ensure visibility and re-enable collider
+        sprite.enabled = true;
+        foreach (int bulletLayer in bulletLayers)
+        {
+            Physics2D.IgnoreLayerCollision(playerLayer, bulletLayer, false);
+        }
+    }
     private bool IsFromBelow(Collision2D collision)
     {
         foreach (ContactPoint2D contact in collision.contacts)
@@ -301,6 +343,7 @@ public class Player : MonoBehaviour
     }
     public void Death()
     {
+
         // Freeze time
         Time.timeScale = 0.05f;
 
