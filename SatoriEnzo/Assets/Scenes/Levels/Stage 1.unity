@@ -4003,6 +4003,7 @@ GameObject:
   - component: {fileID: 1899347394}
   - component: {fileID: 1899347393}
   - component: {fileID: 1899347392}
+  - component: {fileID: 1899347395}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4084,6 +4085,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1899347395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899347391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612d23c2e94195b4698ec24cc506012f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeed: 2
+  targetSize: 2
 --- !u!1 &1952430340
 GameObject:
   m_ObjectHideFlags: 0
@@ -4178,7 +4193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
       propertyPath: immortal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7991548632975310630, guid: 4ff4068f75a8c944db39e76151ed5665, type: 3}
       propertyPath: canDiveInterval

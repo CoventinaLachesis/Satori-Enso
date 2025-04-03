@@ -193,10 +193,10 @@ public class Player : MonoBehaviour
                 Destroy(collision.gameObject);
                 return;
             }
-                
+
 
             if (immortal == false)
-            Invoke(nameof(Death), 0.5f); // Delay scene transition
+                Death();
         }
 
         if (collision.gameObject.CompareTag("StageBullet"))
@@ -209,15 +209,15 @@ public class Player : MonoBehaviour
                 stageBulletScript.Deactivate();
                 return;
             }
-                
+
 
             if (immortal == false)
-            Invoke(nameof(Death), 0.5f); // Delay scene transition
+                Death();
         }
 
         if (collision.gameObject.CompareTag("KillZone"))
         {
-            Invoke(nameof(Death), 0.5f); // Delay scene transition
+            Death();
         }
 
         if (collision.gameObject.CompareTag("Item"))
@@ -303,7 +303,13 @@ public class Player : MonoBehaviour
     }
     public void Death()
     {
-        GoToEnding();
+        // Freeze time
+        Time.timeScale = 0.05f;
+
+        // Zoom camera
+        Camera.main.GetComponent<CameraZoomOnDeath>().FocusOn(transform);
+        Invoke(nameof(GoToEnding), 0.2f); // Delay scene transition
+
     }
     private void GoToEnding()
     {
