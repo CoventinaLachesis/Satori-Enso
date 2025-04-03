@@ -201,8 +201,8 @@ Transform:
   m_GameObject: {fileID: 95486407}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.0799, y: -4.06, z: 0.009435465}
-  m_LocalScale: {x: 8.35914, y: 2.0393624, z: 1}
+  m_LocalPosition: {x: 8.0918, y: -4.06, z: 0.009435465}
+  m_LocalScale: {x: 8.383952, y: 2.0393624, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1334684952}
@@ -1339,8 +1339,8 @@ Transform:
   m_GameObject: {fileID: 703718313}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.11, y: -4.06, z: 0.009435465}
-  m_LocalScale: {x: 8.35914, y: 2.0393624, z: 1}
+  m_LocalPosition: {x: -6.0807, y: -4.06, z: 0.009435465}
+  m_LocalScale: {x: 8.301296, y: 2.0393624, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1334684952}
@@ -3070,7 +3070,11 @@ MonoBehaviour:
   baseShakeMagnitude: 0.1
   shakeDuration: 0.2
   shakeTarget: {fileID: 0}
-  patterns: []
+  patterns:
+  - {fileID: 11400000, guid: 27ef6dc809ea634498a24dc7afb1cae3, type: 2}
+  - {fileID: 11400000, guid: d4ccd65418b1b8747a0e956add1510dc, type: 2}
+  - {fileID: 11400000, guid: 27ef6dc809ea634498a24dc7afb1cae3, type: 2}
+  - {fileID: 11400000, guid: 9ef083156580a3541954fc6ccf4463a5, type: 2}
 --- !u!58 &1503794748
 CircleCollider2D:
   m_ObjectHideFlags: 0
