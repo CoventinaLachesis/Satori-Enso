@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patternName: Pattern
   bulletPrefab: {fileID: 8699459242365256332, guid: 7e606d6692b8aeb4b9b393c6d7500136, type: 3}
-  speed: 5
+  speed: 7
   bulletCount: 10
   motionType: 0
   waveFrequency: 5

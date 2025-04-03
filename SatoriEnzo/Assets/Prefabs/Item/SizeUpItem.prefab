@@ -107,7 +107,8 @@ MonoBehaviour:
   platformDuration: 0
   spawnPlatformOffset: {x: 0, y: 0}
   platformDissolveEffect: 0
-  bonusScale: 0.1
+  platformDisableDuration: 7
+  bonusScale: 0.06
   duration: 10
   expireTime: 8
   blinkInterval: 0.2

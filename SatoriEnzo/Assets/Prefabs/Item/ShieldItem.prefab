@@ -109,7 +109,7 @@ MonoBehaviour:
   platformDissolveEffect: 0
   platformDisableDuration: 7
   bonusScale: 0
-  duration: 10
+  duration: 5
   expireTime: 8
   blinkInterval: 0.2
 --- !u!61 &5736550916988696280

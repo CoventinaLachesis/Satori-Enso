@@ -194,7 +194,7 @@ MonoBehaviour:
   diveTrailPrefab: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
   shieldObject: {fileID: 8699793004886838256}
   platformDissolverObject: {fileID: 911386860459506714}
-  tempPlatform: {fileID: 5289605104003408391, guid: 35cab2ddbadca77479a7246657b75923, type: 3}
+  tempPlatform: {fileID: 5289605104003408391, guid: 1d427896c67d5474a9d0c61631bdb821, type: 3}
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
