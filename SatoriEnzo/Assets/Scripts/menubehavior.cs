@@ -29,6 +29,13 @@ public class StartGameButton : MonoBehaviour
         }
     }
 
+    void Update() {
+
+        if (Input.GetKeyDown(KeyCode.Space)){ 
+            StartGame();
+        }
+    }
+
     void StartGame()
     {
         // Check if the scene name is valid before attempting to load it.
