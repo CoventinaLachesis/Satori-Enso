@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d20eb6e2eccb24e986847a71ff0660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Stage 1 Cutscene
+  sceneName: Tutorial
   startButton: {fileID: 0}
 --- !u!1 &1901745398
 GameObject:
@@ -1144,6 +1144,7 @@ MonoBehaviour:
   allowedScenes:
   - Menu
   - Setting
+  - Tutorial
 --- !u!1 &8153613015653192328
 GameObject:
   m_ObjectHideFlags: 0
