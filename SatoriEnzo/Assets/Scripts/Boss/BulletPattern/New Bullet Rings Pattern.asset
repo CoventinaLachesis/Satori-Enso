@@ -18,6 +18,7 @@ MonoBehaviour:
   bulletCount: 11
   motionType: 1
   waveFrequency: 12.14
-  waveAmplitude: 0.55
+  waveAmplitude: 1.29
+  shootSound: {fileID: 0}
   rings: 2
   ringDelay: 1

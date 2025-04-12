@@ -19,5 +19,6 @@ MonoBehaviour:
   motionType: 0
   waveFrequency: 5
   waveAmplitude: 1
+  shootSound: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
   shootDirection: 1
   interval: 0.2

@@ -15,6 +15,7 @@ public class OrbitingBulletRingPattern : BulletPatternSO
 
     public override IEnumerator Execute(Transform firePoint, BossPattern boss)
     {
+        FXPlayer.PlaySound(shootSound, firePoint.position);
         int count = bulletCount;
         GameObject[] bullets = new GameObject[count];
         float[] angles = new float[count];
