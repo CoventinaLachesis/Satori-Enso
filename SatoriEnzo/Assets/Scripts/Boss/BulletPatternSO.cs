@@ -11,6 +11,8 @@ public abstract class BulletPatternSO : ScriptableObject
     public BulletMotionType motionType = BulletMotionType.Straight;
     public float waveFrequency = 5f;
     public float waveAmplitude = 0.5f;
+    [SerializeField] private AudioClip shootSound;
+
 
     public virtual IEnumerator Execute(Transform firePoint, BossPattern boss)
     {
@@ -33,6 +35,7 @@ public abstract class BulletPatternSO : ScriptableObject
             b.speed = speed;
             b.SetDirection(direction);
         }
+        FXPlayer.PlaySound(shootSound,spawnPos);
     }
     protected void DrawSineWavePath(Vector3 origin, float angleDeg, float waveAmp, float waveFreq, float speed, int samples = 30, float spacing = 0.1f)
     {

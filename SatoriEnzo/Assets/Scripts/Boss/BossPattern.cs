@@ -106,7 +106,7 @@ public abstract class BossPattern : MonoBehaviour
         {
             Debug.LogError("Bullet prefab does not have a BossBullet script!");
         }
-        PlaySound(shootSound);
+        
 
 
     }
