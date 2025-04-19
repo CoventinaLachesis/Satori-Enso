@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patternName: Pattern
   bulletPrefab: {fileID: 8699459242365256332, guid: 333cdfb200571314eb62ad3cd3ab437a, type: 3}
-  speed: 10
+  speed: 7
   bulletCount: 5
   motionType: 0
   waveFrequency: 1.54
   waveAmplitude: 0.73
+  shootSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
   spirals: 4
   interval: 0.1
